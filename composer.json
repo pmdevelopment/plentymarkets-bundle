@@ -1,0 +1,24 @@
+{
+    "name": "pmdevelopment/plentymarkets-bundle",
+    "description": "Plentymarkets API",
+    "license": "UNLICENSED",
+    "authors": [
+        {
+            "name": "Sven Joder",
+            "email": "sj@pmdevelopment.de"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "ext-xml": "*",
+		"doctrine/orm": "*",
+        "jms/serializer": "^1.1.0",
+		"symfony/form": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PM\\PlentyMarketsBundle\\": ""
+        }
+    },
+    "target-dir": "PM/PlentyMarketsBundle"
+}
