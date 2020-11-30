@@ -14,10 +14,5 @@
 	"doctrine/orm": "*",
         "jms/serializer": "^1.1.0",
 	"symfony/form": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "PM\\PlentyMarketsBundle\\": ""
-        }
     }
 }
