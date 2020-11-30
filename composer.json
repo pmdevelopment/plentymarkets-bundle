@@ -11,8 +11,13 @@
     "require": {
         "php": "^7.3",
         "ext-xml": "*",
-	"doctrine/orm": "*",
+        "doctrine/orm": "*",
         "jms/serializer": "^1.1.0",
-	"symfony/form": "*"
+        "symfony/form": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PM\\PlentyMarketsBundle\\": "./"
+        }
     }
 }
