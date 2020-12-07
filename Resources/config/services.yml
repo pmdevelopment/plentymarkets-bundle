@@ -15,6 +15,6 @@ services:
   PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
     tags: [{ name: twig.extension }]
 
-    PM\PlentyMarketsBundle\Services\RestfulService:
-      arguments:
-        $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
+  PM\PlentyMarketsBundle\Services\RestfulService:
+    arguments:
+      $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
