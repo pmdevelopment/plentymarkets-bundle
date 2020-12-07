@@ -27,6 +27,16 @@ class ApiTwigExtension extends AbstractExtension
     private $apiLockRepository;
 
     /**
+     * ApiTwigExtension constructor.
+     *
+     * @param ApiLockRepository $apiLockRepository
+     */
+    public function __construct(ApiLockRepository $apiLockRepository)
+    {
+        $this->apiLockRepository = $apiLockRepository;
+    }
+
+    /**
      * @return array|TwigFunction[]
      */
     public function getFunctions()

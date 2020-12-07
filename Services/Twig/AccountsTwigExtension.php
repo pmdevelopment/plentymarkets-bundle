@@ -10,12 +10,10 @@ namespace PM\PlentyMarketsBundle\Services\Twig;
 
 use AppBundle\Entity\Project;
 use PM\PlentyMarketsBundle\Component\Model\Account\Contact;
-use PM\PlentyMarketsBundle\Component\Traits\HasRestfulServiceTrait;
 use PM\PlentyMarketsBundle\Services\RestfulService;
 use Throwable;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig_Extension;
 
 
 /**
@@ -29,6 +27,16 @@ class AccountsTwigExtension extends AbstractExtension
      * @var RestfulService
      */
     private $restfulService;
+
+    /**
+     * AccountsTwigExtension constructor.
+     *
+     * @param RestfulService $restfulService
+     */
+    public function __construct(RestfulService $restfulService)
+    {
+        $this->restfulService = $restfulService;
+    }
 
     /**
      * Get Filters
