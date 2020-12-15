@@ -7,13 +7,16 @@ services:
     autoconfigure: true
     public: false
 
+  PM\PlentyMarketsBundle\Repository\AccessTokenRepository: ~
+  PM\PlentyMarketsBundle\Repository\ApiHitsRepository: ~
   PM\PlentyMarketsBundle\Repository\ApiLockRepository: ~
+  PM\PlentyMarketsBundle\Repository\LimitHistoryRepository: ~
 
   PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
-    tags: [{ name: twig.extension }]
+    tags: [ { name: twig.extension } ]
 
   PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
-    tags: [{ name: twig.extension }]
+    tags: [ { name: twig.extension } ]
 
   PM\PlentyMarketsBundle\Services\RestfulService:
     arguments:
