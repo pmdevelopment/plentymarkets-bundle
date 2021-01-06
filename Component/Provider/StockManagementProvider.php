@@ -78,7 +78,7 @@ class StockManagementProvider extends BaseProvider
         ];
 
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::STOCK_MANAGEMENT_WAREHOUSE_STOCK_MOVEMENTS, $warehouseId));
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -90,7 +90,7 @@ class StockManagementProvider extends BaseProvider
 
         /* Get other pages */
         $merged = $this->getMovements($warehouseId, $dateFrom, $page + 1);
-        if ($merged instanceof Exception) {
+        if ($merged instanceof Throwable) {
             return $merged;
         }
 
