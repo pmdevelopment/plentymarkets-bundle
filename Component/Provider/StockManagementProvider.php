@@ -68,13 +68,13 @@ class StockManagementProvider extends BaseProvider
     {
         $options = [
             'query' => [
-                'createdAtFrom' => urlencode($dateFrom->format('c')),
+                'createdAtFrom' => $dateFrom->format('c'),
                 'itemsPerPage'  => 1000,
                 'page'          => $page,
             ],
         ];
 
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::STOCK_MANAGEMENT_WAREHOUSE_STOCK_MOVEMENTS, $warehouseId));
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::STOCK_MANAGEMENT_WAREHOUSE_STOCK_MOVEMENTS, $warehouseId), $options);
         if ($response instanceof Throwable) {
             return $response;
         }
