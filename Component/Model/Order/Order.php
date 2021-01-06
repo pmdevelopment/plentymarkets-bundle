@@ -11,16 +11,13 @@ namespace PM\PlentyMarketsBundle\Component\Model\Order;
 use DateTime;
 use JMS\Serializer\Annotation as JMS;
 use PM\PlentyMarketsBundle\Component\Model\Account\Address;
-use PM\PlentyMarketsBundle\Component\Request\Payload;
-use PM\PlentyMarketsBundle\Component\RestfulUrl;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class Order
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Order
  *
- * @JMS\ExclusionPolicy("ALL")
+ * @JMS\ExclusionPolicy("all")
  */
 class Order
 {
@@ -122,7 +119,7 @@ class Order
     /**
      * @var int
      *
-     * @JMS\Type("integer")
+     * @JMS\Type("int")
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
@@ -185,26 +182,36 @@ class Order
     /**
      * @var int
      *
-     * @JMS\Type("integer")
+     * @JMS\Type("int")
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
     private $id;
 
     /**
-     * @return OrderItem[]
+     * @var int
+     *
+     * @JMS\Type("int")
+     * @JMS\Expose()
+     * @JMS\Since("1.0")
      */
-    public function getOrderItems()
+    private $referrerId;
+
+
+    /**
+     * @return OrderItem[]|array|null
+     */
+    public function getOrderItems(): ?array
     {
         return $this->orderItems;
     }
 
     /**
-     * @param OrderItem[] $orderItems
+     * @param OrderItem[]|array|null $orderItems
      *
      * @return Order
      */
-    public function setOrderItems($orderItems)
+    public function setOrderItems(?array $orderItems): Order
     {
         $this->orderItems = $orderItems;
 
@@ -487,6 +494,26 @@ class Order
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getReferrerId(): ?int
+    {
+        return $this->referrerId;
+    }
+
+    /**
+     * @param int|null $referrerId
+     *
+     * @return Order
+     */
+    public function setReferrerId(?int $referrerId): Order
+    {
+        $this->referrerId = $referrerId;
 
         return $this;
     }
