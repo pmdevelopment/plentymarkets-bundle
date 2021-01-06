@@ -67,14 +67,11 @@ class StockManagementProvider extends BaseProvider
     public function getMovements(int $warehouseId, DateTimeInterface $dateFrom, int $page = 1)
     {
         $options = [
-            'query' => array_merge(
-                [
-                    'createdAtFrom' => urlencode($dateFrom->format('c')),
-                    'itemsPerPage'  => 1000,
-                    'page'          => $page,
-                ],
-                $query
-            ),
+            'query' => [
+                'createdAtFrom' => urlencode($dateFrom->format('c')),
+                'itemsPerPage'  => 1000,
+                'page'          => $page,
+            ],
         ];
 
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::STOCK_MANAGEMENT_WAREHOUSE_STOCK_MOVEMENTS, $warehouseId));
