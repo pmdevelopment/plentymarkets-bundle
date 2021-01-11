@@ -8,6 +8,7 @@
 
 namespace PM\PlentyMarketsBundle\Component\Provider;
 
+use DateTimeInterface;
 use Exception;
 use GuzzleHttp\RequestOptions;
 use PM\PlentyMarketsBundle\Component\Model\Order\Order;
@@ -18,6 +19,7 @@ use PM\PlentyMarketsBundle\Component\Model\Order\OrderReferrer;
 use PM\PlentyMarketsBundle\Component\Model\Order\OrderShippingPackage;
 use PM\PlentyMarketsBundle\Component\Model\Order\OrderShippingPreset;
 use PM\PlentyMarketsBundle\Component\Model\Order\StatusHistoryEntry;
+use PM\PlentyMarketsBundle\Component\Response\OrderResponse;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
@@ -30,6 +32,43 @@ use Throwable;
  */
 class OrdersProvider extends BaseProvider
 {
+    /**
+     * @param DateTimeInterface $updatedAt
+     * @param int               $page
+     *
+     * @return array|Throwable|array|Order[]
+     * @throws Throwable
+     */
+    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, $page = 1)
+    {
+        $options = [
+            'query' => [
+                'createdAtFrom' => $updatedAt->format('c'),
+                'itemsPerPage'  => 250,
+                'page'          => $page,
+            ],
+        ];
+
+        $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDERS, $options);
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        $data = $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), OrderResponse::class, 'json');
+
+        if (true === $data->isIsLastPage()) {
+            return $data->getEntries();
+        }
+
+        /* Get other pages */
+        $merged = $this->findUpdatedAtFrom($updatedAt, $page + 1);
+        if ($merged instanceof Throwable) {
+            return $merged;
+        }
+
+        return array_merge($data->getEntries(), $merged);
+    }
+
     /**
      * Get Order By Id
      *

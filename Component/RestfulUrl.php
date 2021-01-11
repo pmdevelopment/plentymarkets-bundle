@@ -37,6 +37,7 @@ class RestfulUrl
     public const ORDER_SHIPPING_PACKAGES = 'orders/%d/shipping/packages';
     public const ORDER_SHIPPING_PRESETS = 'orders/shipping/presets';
     public const ORDER_STATUS_HISTORY = 'orders/%d/status-history';
+    public const ORDERS = 'orders';
 
     public const ITEMS = 'items';
     public const ITEM = 'items/%d';
