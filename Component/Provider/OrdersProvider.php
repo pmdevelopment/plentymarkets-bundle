@@ -39,11 +39,11 @@ class OrdersProvider extends BaseProvider
      * @return array|Throwable|array|Order[]
      * @throws Throwable
      */
-    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, $page = 1)
+    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, int $page = 1)
     {
         $options = [
             'query' => [
-                'createdAtFrom' => $updatedAt->format('c'),
+                'updatedAtFrom' => $updatedAt->format('c'),
                 'itemsPerPage'  => 250,
                 'page'          => $page,
             ],

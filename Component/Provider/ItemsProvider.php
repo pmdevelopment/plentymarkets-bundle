@@ -271,7 +271,7 @@ class ItemsProvider extends BaseProvider
      * @return Exception|Item|mixed
      * @throws Throwable
      */
-    public function getById($itemId, array $query = [])
+    public function getById(int $itemId, array $query = [])
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
