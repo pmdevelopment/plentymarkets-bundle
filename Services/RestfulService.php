@@ -25,6 +25,7 @@ use PM\PlentyMarketsBundle\Component\Provider\ItemsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\OrdersProvider;
 use PM\PlentyMarketsBundle\Component\Provider\PaymentsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\StockManagementProvider;
+use PM\PlentyMarketsBundle\Component\Provider\TagsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\WarehousesProvider;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
 use PM\PlentyMarketsBundle\Entity\AccessToken;
@@ -295,6 +296,20 @@ class RestfulService
         $client = $this->login();
 
         return new PaymentsProvider($client, $this);
+    }
+
+    /**
+     * @param Config $config
+     *
+     * @return TagsProvider
+     * @throws Throwable
+     */
+    public function tags(Config $config): TagsProvider
+    {
+        $this->setConfig($config);
+        $client = $this->login();
+
+        return new TagsProvider($client, $this);
     }
 
     /**

@@ -10,6 +10,7 @@ namespace PM\PlentyMarketsBundle\Component\Provider;
 
 use DateTimeInterface;
 use Exception;
+use PM\PlentyMarketsBundle\Component\Model\StockManagement\StockMovement;
 use PM\PlentyMarketsBundle\Component\Model\StockManagement\Warehouse;
 use PM\PlentyMarketsBundle\Component\Response\StockMovementsResponse;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
