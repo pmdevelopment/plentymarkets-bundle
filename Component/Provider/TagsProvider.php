@@ -26,7 +26,7 @@ class TagsProvider extends BaseProvider
      *
      * @return Throwable|null
      */
-    public function putRelationship(int $tagId, string $tagType, string $relationshipValue, string $relationshipUUID5 = ''): ?Throwable
+    public function postRelationship(int $tagId, string $tagType, string $relationshipValue, string $relationshipUUID5 = ''): ?Throwable
     {
         $options = [
             RequestOptions::JSON => [
@@ -37,7 +37,7 @@ class TagsProvider extends BaseProvider
             ],
         ];
 
-        $response = $this->getResponse(Request::METHOD_PUT, RestfulUrl::TAGS_RELATIONSHIPS, $options);
+        $response = $this->getResponse(Request::METHOD_POST, RestfulUrl::TAGS_RELATIONSHIPS, $options);
 
         if ($response instanceof Throwable) {
             return $response;
