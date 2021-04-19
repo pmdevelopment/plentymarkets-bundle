@@ -60,19 +60,28 @@ class StockManagementProvider extends BaseProvider
     }
 
     /**
-     * @param DateTimeInterface $dateFrom
+     * @param int                    $warehouseId
+     * @param DateTimeInterface|null $dateFrom
+     * @param int                    $page
+     * @param array                  $query
      *
      * @return Exception|mixed|StockMovement[]
      * @throws Throwable
      */
-    public function getMovements(int $warehouseId, DateTimeInterface $dateFrom, int $page = 1)
+    public function getMovements(int $warehouseId, ?DateTimeInterface $dateFrom = null, int $page = 1, array $query = [])
     {
+        if (null !== $dateFrom) {
+            $query['createdAtFrom'] = $dateFrom->format('c');
+        }
+
         $options = [
-            'query' => [
-                'createdAtFrom' => $dateFrom->format('c'),
-                'itemsPerPage'  => 1000,
-                'page'          => $page,
-            ],
+            'query' => array_merge(
+                $query,
+                [
+                    'itemsPerPage' => 1000,
+                    'page'         => $page,
+                ]
+            ),
         ];
 
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::STOCK_MANAGEMENT_WAREHOUSE_STOCK_MOVEMENTS, $warehouseId), $options);
@@ -87,7 +96,7 @@ class StockManagementProvider extends BaseProvider
         }
 
         /* Get other pages */
-        $merged = $this->getMovements($warehouseId, $dateFrom, $page + 1);
+        $merged = $this->getMovements($warehouseId, $dateFrom, $page + 1, $query);
         if ($merged instanceof Throwable) {
             return $merged;
         }
