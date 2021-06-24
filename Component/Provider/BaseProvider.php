@@ -12,6 +12,7 @@ use DateTime;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\RequestOptions;
 use PM\PlentyMarketsBundle\Component\Exceptions\ApiLockActiveException;
 use PM\PlentyMarketsBundle\Component\Exceptions\ApiLoginFailedException;
@@ -204,6 +205,11 @@ class BaseProvider
 
                 sleep(70);
 
+                return $this->getResponse($method, $path, $options, true, $flushEntities);
+            }
+
+            /* Timeout */
+            if (false === $final && $e instanceof ConnectException) {
                 return $this->getResponse($method, $path, $options, true, $flushEntities);
             }
 
