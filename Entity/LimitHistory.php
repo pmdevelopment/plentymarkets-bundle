@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LimitHistory
  *
- * @ORM\Table(name="pm_plenty_markets_limit_history", indexes={@ORM\Index(name="idx_api",columns={"api", "path"})})
+ * @ORM\Table(name="pm_plenty_markets_limit_history", indexes={@ORM\Index(name="limit_history_idx_api",columns={"api", "path"})})
  * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\LimitHistoryRepository")
  *
  * @ORM\HasLifecycleCallbacks()

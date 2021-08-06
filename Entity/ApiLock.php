@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ApiLock
  *
- * @ORM\Table(name="pm_plenty_markets_api_lock", indexes={@ORM\Index(name="idx_api",columns={"api"})})
+ * @ORM\Table(name="pm_plenty_markets_api_lock", indexes={@ORM\Index(name="api_lock_idx_api",columns={"api"})})
  * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\ApiLockRepository")
  */
 class ApiLock

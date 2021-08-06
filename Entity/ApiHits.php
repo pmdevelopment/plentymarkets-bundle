@@ -8,7 +8,7 @@ use PM\PlentyMarketsBundle\Component\Helper\MixedHelper;
 /**
  * ApiHits
  *
- * @ORM\Table(name="pm_plenty_markets_api_hits", indexes={@ORM\Index(name="api_idx", columns={"day","api_id"})})
+ * @ORM\Table(name="pm_plenty_markets_api_hits", indexes={@ORM\Index(name="api_hits_api_idx", columns={"day","api_id"})})
  * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\ApiHitsRepository")
  */
 class ApiHits

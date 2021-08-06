@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * AccessToken
  *
- * @ORM\Table(name="pm_plenty_markets_access_token", indexes={@ORM\Index(name="idx_api",columns={"api"})})
+ * @ORM\Table(name="pm_plenty_markets_access_token", indexes={@ORM\Index(name="access_token_idx_api",columns={"api"})})
  * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\AccessTokenRepository")
  */
 class AccessToken
