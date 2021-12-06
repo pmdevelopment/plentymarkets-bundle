@@ -165,6 +165,15 @@ class OrderItem
     private $properties;
 
     /**
+     * @var OrderItemReference[]
+     *
+     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemReference>")
+     * @JMS\Expose()
+     * @JMS\Since("1.0")
+     */
+    private $references;
+
+    /**
      * @return int
      */
     public function getId()
@@ -480,6 +489,26 @@ class OrderItem
     public function setProperties($properties)
     {
         $this->properties = $properties;
+
+        return $this;
+    }
+
+    /**
+     * @return OrderItemReference[]
+     */
+    public function getReferences(): array
+    {
+        return $this->references;
+    }
+
+    /**
+     * @param OrderItemReference[] $references
+     *
+     * @return OrderItem
+     */
+    public function setReferences(array $references): OrderItem
+    {
+        $this->references = $references;
 
         return $this;
     }
