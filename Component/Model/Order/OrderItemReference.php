@@ -10,6 +10,7 @@ use JMS\Serializer\Annotation as JMS;
  */
 class OrderItemReference
 {
+    public const TYPE_BUNDLE = 'bundle';
 
     /**
      * @JMS\Type("integer")
