@@ -72,7 +72,7 @@ class StatusHistoryEntry
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
-    private $procedureText;
+    private $procedureText = '';
 
     /**
      * @return int
@@ -187,7 +187,7 @@ class StatusHistoryEntry
      *
      * @return StatusHistoryEntry
      */
-    public function setProcedureText($procedureText)
+    public function setProcedureText(string $procedureText): self
     {
         $this->procedureText = $procedureText;
 
