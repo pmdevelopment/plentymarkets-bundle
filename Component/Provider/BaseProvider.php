@@ -208,8 +208,10 @@ class BaseProvider
                 return $this->getResponse($method, $path, $options, true, $flushEntities);
             }
 
-            /* Timeout */
+            /* Timeout or connection refused */
             if (false === $final && $e instanceof ConnectException) {
+                sleep(10);
+
                 return $this->getResponse($method, $path, $options, true, $flushEntities);
             }
 
