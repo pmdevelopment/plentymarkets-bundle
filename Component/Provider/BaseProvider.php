@@ -13,6 +13,7 @@ use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
 use PM\PlentyMarketsBundle\Component\Exceptions\ApiLockActiveException;
 use PM\PlentyMarketsBundle\Component\Exceptions\ApiLoginFailedException;
@@ -211,6 +212,16 @@ class BaseProvider
             /* Timeout or connection refused */
             if (false === $final && $e instanceof ConnectException) {
                 sleep(10);
+
+                return $this->getResponse($method, $path, $options, true, $flushEntities);
+            }
+
+            /* Server error */
+            if (
+                false === $final && $e instanceof ServerException &&
+                (Response::HTTP_BAD_GATEWAY === $e->getResponse()->getStatusCode() || Response::HTTP_INTERNAL_SERVER_ERROR === $e->getResponse()->getStatusCode())
+            ) {
+                sleep(2);
 
                 return $this->getResponse($method, $path, $options, true, $flushEntities);
             }
