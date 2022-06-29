@@ -120,9 +120,7 @@ class ItemsProvider extends BaseProvider
             return $response;
         }
 
-        /* Fix wrong datetime */
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+        $body = $this->getBodyContentsWithFixedDate($response);
 
         /** @var ItemsVariationsResponse $data */
         $data = $this->getService()->getSerializer()->deserialize($body, ItemsVariationsResponse::class, 'json');
@@ -375,9 +373,7 @@ class ItemsProvider extends BaseProvider
             return $response;
         }
 
-        /* Fix wrong datetime */
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+        $body = $this->getBodyContentsWithFixedDate($response);
 
         return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationWarehouse::class), 'json');
     }
@@ -502,9 +498,7 @@ class ItemsProvider extends BaseProvider
             return $response;
         }
 
-        /* Fix wrong datetime */
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+        $body = $this->getBodyContentsWithFixedDate($response);
 
         return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationSupplier::class), 'json');
     }
@@ -903,5 +897,13 @@ class ItemsProvider extends BaseProvider
         }
 
         return $request;
+    }
+
+    private function getBodyContentsWithFixedDate(ResponseInterface $response): string
+    {
+        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
+        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+
+        return $body;
     }
 }

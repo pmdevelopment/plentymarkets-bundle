@@ -21,6 +21,7 @@ use PM\PlentyMarketsBundle\Component\Model\Order\OrderShippingPreset;
 use PM\PlentyMarketsBundle\Component\Model\Order\StatusHistoryEntry;
 use PM\PlentyMarketsBundle\Component\Response\OrderResponse;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
@@ -54,7 +55,9 @@ class OrdersProvider extends BaseProvider
             return $response;
         }
 
-        $data = $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), OrderResponse::class, 'json');
+        $body = $this->getBodyContentsWithFixedDate($response);
+
+        $data = $this->getService()->getSerializer()->deserialize($body, OrderResponse::class, 'json');
 
         if (true === $data->isIsLastPage()) {
             return $data->getEntries();
@@ -86,9 +89,7 @@ class OrdersProvider extends BaseProvider
             return $response;
         }
 
-        /* Fix wrong datetime */
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+        $body = $this->getBodyContentsWithFixedDate($response);
 
         try {
             return $this->getService()->getSerializer()->deserialize($body, Order::class, 'json');
@@ -322,5 +323,13 @@ class OrdersProvider extends BaseProvider
         }
 
         return true;
+    }
+
+    private function getBodyContentsWithFixedDate(ResponseInterface $response): string
+    {
+        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
+        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+
+        return $body;
     }
 }
