@@ -49,7 +49,7 @@ class StatusHistoryEntry
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
-    private $userId;
+    private ?int $userId = null;
 
     /**
      * @JMS\Type("string")
@@ -106,12 +106,12 @@ class StatusHistoryEntry
         return $this;
     }
 
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
 
-    public function setUserId(int $userId): self
+    public function setUserId(?int $userId): self
     {
         $this->userId = $userId;
 
