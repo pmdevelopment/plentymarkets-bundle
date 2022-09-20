@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 11.07.2017
- * Time: 13:22
- */
 
 namespace PM\PlentyMarketsBundle\Component\Provider;
 
@@ -26,11 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
 
-/**
- * Class OrdersProvider
- *
- * @package PM\PlentyMarketsBundle\Component\Provider
- */
 class OrdersProvider extends BaseProvider
 {
     /**
@@ -56,7 +45,6 @@ class OrdersProvider extends BaseProvider
         }
 
         $body = $this->getBodyContentsWithFixedDate($response);
-
         $data = $this->getService()->getSerializer()->deserialize($body, OrderResponse::class, 'json');
 
         if (true === $data->isIsLastPage()) {

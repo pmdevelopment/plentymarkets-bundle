@@ -8,21 +8,15 @@
 
 namespace PM\PlentyMarketsBundle\Component\Model\Order;
 
-use DateTime;
+use DateTimeInterface;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * Class StatusHistoryEntry
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
  * @JMS\ExclusionPolicy("ALL")
  */
 class StatusHistoryEntry
 {
     /**
-     * @var integer
-     *
      * @JMS\Type("integer")
      * @JMS\Expose()
      * @JMS\Since("1.0")
@@ -30,8 +24,6 @@ class StatusHistoryEntry
     private $id;
 
     /**
-     * @var integer
-     *
      * @JMS\Type("integer")
      * @JMS\Expose()
      * @JMS\Since("1.0")
@@ -39,8 +31,6 @@ class StatusHistoryEntry
     private $orderId;
 
     /**
-     * @var float
-     *
      * @JMS\Type("float")
      * @JMS\Expose()
      * @JMS\Since("1.0")
@@ -48,8 +38,6 @@ class StatusHistoryEntry
     private $statusId;
 
     /**
-     * @var DateTime
-     *
      * @JMS\Type("DateTime")
      * @JMS\Expose()
      * @JMS\Since("1.0")
@@ -57,8 +45,6 @@ class StatusHistoryEntry
     private $createdAt;
 
     /**
-     * @var integer
-     *
      * @JMS\Type("integer")
      * @JMS\Expose()
      * @JMS\Since("1.0")
@@ -66,128 +52,78 @@ class StatusHistoryEntry
     private $userId;
 
     /**
-     * @var string
-     *
      * @JMS\Type("string")
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
-    private $procedureText = '';
+    private ?string $procedureText = null;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setId($id)
+    public function setId(int $id): self
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getOrderId(): int
     {
         return $this->orderId;
     }
 
-    /**
-     * @param int $orderId
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setOrderId($orderId)
+    public function setOrderId(int $orderId): self
     {
         $this->orderId = $orderId;
 
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getStatusId(): float
     {
         return $this->statusId;
     }
 
-    /**
-     * @param float $statusId
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setStatusId($statusId)
+    public function setStatusId(float $statusId): self
     {
         $this->statusId = $statusId;
 
         return $this;
     }
 
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt(): DateTime
+    public function getCreatedAt(): DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTime $createdAt
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
 
-    /**
-     * @param int $userId
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setUserId($userId)
+    public function setUserId(int $userId): self
     {
         $this->userId = $userId;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getProcedureText(): string
+    public function getProcedureText(): ?string
     {
         return $this->procedureText;
     }
 
-    /**
-     * @param string $procedureText
-     *
-     * @return StatusHistoryEntry
-     */
-    public function setProcedureText(string $procedureText): self
+    public function setProcedureText(?string $procedureText): self
     {
         $this->procedureText = $procedureText;
 
