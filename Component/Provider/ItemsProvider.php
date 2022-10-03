@@ -881,7 +881,7 @@ class ItemsProvider extends BaseProvider
      * @return array|Exception|mixed|ItemVariation
      * @throws Throwable
      */
-    private function appendVariationVisibilitySettingsToRequest(int $itemId, int $variationId, array $request)
+    public function appendVariationVisibilitySettingsToRequest(int $itemId, int $variationId, array $request)
     {
         $variation = $this->getVariation($itemId, $variationId);
         if ($variation instanceof Exception) {
