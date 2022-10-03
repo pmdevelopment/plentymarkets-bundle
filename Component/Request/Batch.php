@@ -3,76 +3,51 @@
 
 namespace PM\PlentyMarketsBundle\Component\Request;
 
-/**
- * Class Batch
- *
- * @package PM\PlentyMarketsBundle\Component\Request
- */
 class Batch
 {
-    /**
-     * @var array|Payload[]
-     */
-    private $payloads;
+    private int $limitPerPage = 50;
 
-    /**
-     * @return array|Payload[]
-     */
-    public function getPayloads()
+    private array $payloads = [];
+
+    public function __construct(?int $limitPerPage = null)
+    {
+        if (null !== $limitPerPage) {
+            $this->limitPerPage = $limitPerPage;
+        }
+    }
+
+    public function getPayloads(): array
     {
         return $this->payloads;
     }
 
-    /**
-     * @param array|Payload[] $payloads
-     *
-     * @return Batch
-     */
-    public function setPayloads($payloads)
+    public function setPayloads(array $payloads): self
     {
         $this->payloads = $payloads;
 
         return $this;
     }
 
-    /**
-     * @param Payload $payload
-     *
-     * @return $this
-     */
-    public function addPayload(Payload $payload)
+    public function addPayload(Payload $payload): self
     {
         $this->payloads[] = $payload;
 
         return $this;
     }
 
-
-    /**
-     * Get Page count
-     *
-     * @return int
-     */
     public function getPageCount(): int
     {
-        return ceil(count($this->payloads) / 50);
+        return ceil(count($this->payloads) / $this->limitPerPage);
     }
 
-    /**
-     * Get Page
-     *
-     * @param int $page
-     *
-     * @return $this|Batch
-     */
     public function getPage(int $page = 1): Batch
     {
-        if (51 > count($this->payloads)) {
+        if ($this->limitPerPage >= count($this->payloads)) {
             return $this;
         }
 
         $batch = new Batch();
-        $batch->setPayloads(array_slice($this->payloads, (50 * ($page - 1)), 50));
+        $batch->setPayloads(array_slice($this->payloads, ($this->limitPerPage * ($page - 1)), $this->limitPerPage));
 
         return $batch;
     }
