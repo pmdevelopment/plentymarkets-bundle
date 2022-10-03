@@ -710,22 +710,14 @@ class ItemsProvider extends BaseProvider
         int $newWarehouseId,
         $reason = Item::REASON_STOCK_REDISTRIBUTE
     ) {
-        $request = $this->appendVariationVisibilitySettingsToRequest(
-            $itemId,
-            $variationId,
-            [
-                'reasonId'                 => $reason,
-                'quantity'                 => $quantity,
-                'currentStorageLocationId' => $currentStorageLocationId,
-                'currentWarehouseId'       => $currentWarehouseId,
-                'newStorageLocationId'     => $newStorageLocationId,
-                'newWarehouseId'           => $newWarehouseId,
-            ]
-        );
-
-        if ($request instanceof Exception) {
-            return $request;
-        }
+        $request = [
+            'reasonId'                 => $reason,
+            'quantity'                 => $quantity,
+            'currentStorageLocationId' => $currentStorageLocationId,
+            'currentWarehouseId'       => $currentWarehouseId,
+            'newStorageLocationId'     => $newStorageLocationId,
+            'newWarehouseId'           => $newWarehouseId,
+        ];
 
         $response = $this->getResponse(
             Request::METHOD_PUT,
@@ -844,17 +836,9 @@ class ItemsProvider extends BaseProvider
      */
     public function putShopPosition($itemId, $variationId, $position)
     {
-        $request = $this->appendVariationVisibilitySettingsToRequest(
-            $itemId,
-            $variationId,
-            [
-                'position' => $position,
-            ]
-        );
-
-        if ($request instanceof Exception) {
-            return $request;
-        }
+        $request = [
+            'position' => $position,
+        ];
 
         $response = $this->getResponse(
             Request::METHOD_PUT,
@@ -883,19 +867,6 @@ class ItemsProvider extends BaseProvider
      */
     public function appendVariationVisibilitySettingsToRequest(int $itemId, int $variationId, array $request)
     {
-        $variation = $this->getVariation($itemId, $variationId);
-        if ($variation instanceof Exception) {
-            return $variation;
-        }
-
-        if (null !== $variation->isIsInvisibleIfNetStockIsNotPositive()) {
-            $request['isInvisibleIfNetStockIsNotPositive'] = $variation->isIsInvisibleIfNetStockIsNotPositive();
-        }
-
-        if (null !== $variation->isIsVisibleIfNetStockIsPositive()) {
-            $request['isVisibleIfNetStockIsPositive'] = $variation->isIsVisibleIfNetStockIsPositive();
-        }
-
         return $request;
     }
 
