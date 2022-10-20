@@ -1,19 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * Date: 12.07.2017
- * Time: 11:24
- */
 
 namespace PM\PlentyMarketsBundle\Component\Provider;
 
 use DateTime;
 use DateTimeInterface;
-use Exception;
 use GuzzleHttp\RequestOptions;
 use PM\PlentyMarketsBundle\Component\Model\Item\Barcode;
 use PM\PlentyMarketsBundle\Component\Model\Item\Item;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemImage;
+use PM\PlentyMarketsBundle\Component\Model\Item\ItemShippingProfile;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariation;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationBarcode;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationSalesPrice;
@@ -34,23 +29,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
 
-/**
- * Class ItemsProvider
- *
- * @package PM\PlentyMarketsBundle\Component\Provider
- */
 class ItemsProvider extends BaseProvider
 {
-    /**
-     * Get All
-     *
-     * @param int   $page
-     * @param array $query
-     *
-     * @return Exception|Item[]
-     * @throws Throwable
-     */
-    public function getAll($page = 1, $query = [])
+    public function getAll(int $page = 1, array $query = []): array|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
@@ -65,7 +46,7 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -78,7 +59,7 @@ class ItemsProvider extends BaseProvider
 
         /* Get other pages */
         $merged = $this->getAll($page + 1, $query);
-        if ($merged instanceof Exception) {
+        if ($merged instanceof Throwable) {
             $this->getService()->getLogger()->error(
                 'ItemsProvider:getAll got some exception importing more pages',
                 [
@@ -92,16 +73,7 @@ class ItemsProvider extends BaseProvider
         return array_merge($data->getEntries(), $merged);
     }
 
-    /**
-     * Get All Variations
-     *
-     * @param int   $page
-     * @param array $query
-     *
-     * @return Exception|ItemVariation[]
-     * @throws Throwable
-     */
-    public function getAllVariations($page = 1, $query = [])
+    public function getAllVariations(int $page = 1, array $query = []): array|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
@@ -116,7 +88,7 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -131,7 +103,7 @@ class ItemsProvider extends BaseProvider
 
         /* Get other pages */
         $merged = $this->getAllVariations($page + 1, $query);
-        if ($merged instanceof Exception) {
+        if ($merged instanceof Throwable) {
             $this->getService()->getLogger()->error(
                 'ItemsProvider:getAllVariations got some exception importing more pages',
                 [
@@ -145,13 +117,7 @@ class ItemsProvider extends BaseProvider
         return array_merge($data->getEntries(), $merged);
     }
 
-    /**
-     * Get All With Variations
-     *
-     * @return Exception|Item[]
-     * @throws Throwable
-     */
-    public function getAllWithVariations()
+    public function getAllWithVariations(): array|Throwable
     {
         return array_reverse(
             $this->getAll(
@@ -163,13 +129,7 @@ class ItemsProvider extends BaseProvider
         );
     }
 
-    /**
-     * Get All With Variations
-     *
-     * @return Exception|Item[]
-     * @throws Throwable
-     */
-    public function getAllWithVariationsAndImages()
+    public function getAllWithVariationsAndImages(): array|Throwable
     {
         return array_reverse(
             $this->getAll(
@@ -181,53 +141,7 @@ class ItemsProvider extends BaseProvider
         );
     }
 
-    /**
-     * @param int $page
-     *
-     * @return array|mixed|Manufacturer[]
-     * @throws Throwable
-     */
-    public function getManufacturers($page = 1)
-    {
-        $response = $this->getResponse(
-            Request::METHOD_GET,
-            RestfulUrl::ITEM_MANUFACTURERS,
-            [
-                'query' => array_merge(
-                    [
-                        'page' => $page,
-                    ]
-                ),
-            ]
-        );
-
-        if ($response instanceof Exception) {
-            return $response;
-        }
-
-        /** @var ManufacturersResponse $data */
-        $data = $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            ManufacturersResponse::class,
-            'json'
-        );
-
-        if (true === $data->isIsLastPage()) {
-            return $data->getEntries();
-        }
-
-        return array_merge($data->getEntries(), $this->getManufacturers($page + 1));
-    }
-
-    /**
-     * Get Barcode Types
-     *
-     * @param int $page
-     *
-     * @return array|Exception|Barcode[]
-     * @throws Throwable
-     */
-    public function getBarcodes($page = 1)
+    public function getBarcodes(int $page = 1): array|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
@@ -241,7 +155,7 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -259,17 +173,7 @@ class ItemsProvider extends BaseProvider
         return array_merge($data->getEntries(), $this->getBarcodes($page + 1));
     }
 
-    /**
-     * Get By Id
-     *
-     * @param int        $itemId
-     *
-     * @param array|null $query
-     *
-     * @return Exception|Item|mixed
-     * @throws Throwable
-     */
-    public function getById(int $itemId, array $query = [])
+    public function getById(int $itemId, array $query = []): Throwable|Item
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
@@ -279,163 +183,35 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), Item::class, 'json');
     }
 
-    /**
-     * Get Variation
-     *
-     * @param int $itemId
-     * @param int $variationId
-     *
-     * @return Exception|ItemVariation|mixed
-     * @throws Throwable
-     */
-    public function getVariation($itemId, $variationId)
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            return $response;
-        }
-
-        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), ItemVariation::class, 'json');
-    }
-
-    /**
-     * @param int $itemId
-     * @param int $variationId
-     *
-     * @return array|ItemImage[]
-     * @throws Throwable
-     */
-    public function getVariationImages(int $itemId, int $variationId): array
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_IMAGES, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            throw $response;
-        }
-
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemImage::class),
-            'json'
-        );
-    }
-
-    /**
-     * Get Variation Stock
-     *
-     * @param int  $itemId
-     * @param int  $variationId
-     * @param bool $flushEntities
-     *
-     * @return array|Exception|ItemVariationStock[]
-     * @throws Throwable
-     */
-    public function getVariationStock(int $itemId, int $variationId, bool $flushEntities = true)
+    public function getManufacturers(int $page = 1): array|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_GET,
-            sprintf(RestfulUrl::ITEM_VARIATION_STOCK, $itemId, $variationId),
-            [],
-            false,
-            false,
-            $flushEntities
-        );
-        if ($response instanceof Exception) {
-            throw $response;
-        }
-
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemVariationStock::class),
-            'json'
-        );
-    }
-
-    /**
-     * Get variation warehouses
-     *
-     * @param int $itemId
-     * @param int $variationId
-     *
-     * @return array|Exception|ItemVariationWarehouse[]
-     * @throws Throwable
-     */
-    public function getVariationWarehouses($itemId, $variationId)
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_WAREHOUSES, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            return $response;
-        }
-
-        $body = $this->getBodyContentsWithFixedDate($response);
-
-        return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationWarehouse::class), 'json');
-    }
-
-    /**
-     * Get Variation Barcodes
-     *
-     * @param int $itemId
-     * @param int $variationId
-     *
-     * @return array|Exception|ItemVariationBarcode[]
-     * @throws Throwable
-     */
-    public function getVariationBarcodes(int $itemId, int $variationId): array
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_BARCODES, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            throw $response;
-        }
-
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemVariationBarcode::class),
-            'json'
-        );
-    }
-
-    /**
-     * Get All
-     *
-     * @param       $itemId
-     * @param       $variationId
-     * @param int   $page
-     * @param array $query
-     *
-     * @return array|Exception|mixed|ItemVariationStockStorageLocation[]
-     * @throws Throwable
-     */
-    public function getVariationStockStorageLocations(int $itemId, int $variationId, $page = 1, $query = [])
-    {
-        $response = $this->getResponse(
-            Request::METHOD_GET,
-            sprintf(RestfulUrl::ITEM_VARIATION_STOCK_STORAGE_LOCATIONS, $itemId, $variationId),
+            RestfulUrl::ITEM_MANUFACTURERS,
             [
                 'query' => array_merge(
                     [
-                        'page'         => $page,
-                        'itemsPerPage' => 200,
-                    ],
-                    $query
+                        'page' => $page,
+                    ]
                 ),
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
-        /** @var ItemLocationsResponse $data */
+        /** @var ManufacturersResponse $data */
         $data = $this->getService()->getSerializer()->deserialize(
             $response->getBody()->getContents(),
-            ItemLocationsResponse::class,
+            ManufacturersResponse::class,
             'json'
         );
 
@@ -443,92 +219,29 @@ class ItemsProvider extends BaseProvider
             return $data->getEntries();
         }
 
-        /* Get other pages */
-        $merged = $this->getVariationStockStorageLocations($itemId, $variationId, $page + 1, $query);
-        if ($merged instanceof Exception) {
-            $this->getService()->getLogger()->error(
-                'ItemsProvider:getVariationStockStorageLocations got some exception importing more pages',
-                [
-                    'message' => $merged->getMessage(),
-                ]
-            );
-
-            $merged = [];
-        }
-
-        return array_merge($data->getEntries(), $merged);
+        return array_merge($data->getEntries(), $this->getManufacturers($page + 1));
     }
 
-    /**
-     * Get Variation Sales Prices
-     *
-     * @param int $itemId
-     * @param int $variationId
-     *
-     * @return array|Exception|ItemVariationSalesPrice[]
-     * @throws Throwable
-     */
-    public function getVariationSalesPrices($itemId, $variationId)
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_SALES_PRICES, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            return $response;
-        }
-
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemVariationSalesPrice::class),
-            'json'
-        );
-    }
-
-    /**
-     * Get Variation Suppliers
-     *
-     * @param string $itemId
-     * @param string $variationId
-     *
-     * @return array|Exception|mixed|ItemVariationSupplier[]
-     * @throws Throwable
-     */
-    public function getVariationSuppliers($itemId, $variationId)
-    {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_SUPPLIERS, $itemId, $variationId));
-        if ($response instanceof Exception) {
-            return $response;
-        }
-
-        $body = $this->getBodyContentsWithFixedDate($response);
-
-        return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationSupplier::class), 'json');
-    }
-
-    /**
-     * Get Sales Price
-     *
-     * @param int $salePriceId
-     *
-     * @return mixed|Exception|SalesPrice
-     * @throws Throwable
-     */
     public function getSalesPrice(int $salePriceId): ?SalesPrice
     {
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_SALES_PRICE, $salePriceId));
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             throw $response;
         }
 
         return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), SalesPrice::class, 'json');
     }
 
-    /**
-     * Get Updated Since
-     *
-     * @param DateTimeInterface|null $since
-     *
-     * @return array|Item[]
-     * @throws Throwable
-     */
+    public function getShippingProfiles(int $itemId): array|Throwable
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_SHIPPING_PROFILES, $itemId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), sprintf('array<%s>', ItemShippingProfile::class), 'json');
+    }
+
     public function getUpdatedSince(?DateTimeInterface $since): array
     {
         $query = [];
@@ -546,14 +259,150 @@ class ItemsProvider extends BaseProvider
         return $result;
     }
 
-    /**
-     * Item Variations
-     *
-     * @param DateTimeInterface|null $since
-     *
-     * @return array|ItemVariation[]
-     * @throws Throwable
-     */
+    public function getVariation(int $itemId, int $variationId): Throwable|ItemVariation
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), ItemVariation::class, 'json');
+    }
+
+    public function getVariationImages(int $itemId, int $variationId): array
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_IMAGES, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            throw $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize(
+            $response->getBody()->getContents(),
+            sprintf('array<%s>', ItemImage::class),
+            'json'
+        );
+    }
+
+    public function getVariationStock(int $itemId, int $variationId, bool $flushEntities = true): array
+    {
+        $response = $this->getResponse(
+            Request::METHOD_GET,
+            sprintf(RestfulUrl::ITEM_VARIATION_STOCK, $itemId, $variationId),
+            [],
+            false,
+            false,
+            $flushEntities
+        );
+        if ($response instanceof Throwable) {
+            throw $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize(
+            $response->getBody()->getContents(),
+            sprintf('array<%s>', ItemVariationStock::class),
+            'json'
+        );
+    }
+
+    public function getVariationWarehouses(int $itemId, int $variationId): array|Throwable
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_WAREHOUSES, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        $body = $this->getBodyContentsWithFixedDate($response);
+
+        return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationWarehouse::class), 'json');
+    }
+
+    public function getVariationBarcodes(int $itemId, int $variationId): array
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_BARCODES, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            throw $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize(
+            $response->getBody()->getContents(),
+            sprintf('array<%s>', ItemVariationBarcode::class),
+            'json'
+        );
+    }
+
+    public function getVariationStockStorageLocations(int $itemId, int $variationId, $page = 1, array $query = []): array|Throwable
+    {
+        $response = $this->getResponse(
+            Request::METHOD_GET,
+            sprintf(RestfulUrl::ITEM_VARIATION_STOCK_STORAGE_LOCATIONS, $itemId, $variationId),
+            [
+                'query' => array_merge(
+                    [
+                        'page'         => $page,
+                        'itemsPerPage' => 200,
+                    ],
+                    $query
+                ),
+            ]
+        );
+
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        /** @var ItemLocationsResponse $data */
+        $data = $this->getService()->getSerializer()->deserialize(
+            $response->getBody()->getContents(),
+            ItemLocationsResponse::class,
+            'json'
+        );
+
+        if (true === $data->isIsLastPage()) {
+            return $data->getEntries();
+        }
+
+        /* Get other pages */
+        $merged = $this->getVariationStockStorageLocations($itemId, $variationId, $page + 1, $query);
+        if ($merged instanceof Throwable) {
+            $this->getService()->getLogger()->error(
+                'ItemsProvider:getVariationStockStorageLocations got some exception importing more pages',
+                [
+                    'message' => $merged->getMessage(),
+                ]
+            );
+
+            $merged = [];
+        }
+
+        return array_merge($data->getEntries(), $merged);
+    }
+
+    public function getVariationSalesPrices(int $itemId, int $variationId): array|Throwable
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_SALES_PRICES, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize(
+            $response->getBody()->getContents(),
+            sprintf('array<%s>', ItemVariationSalesPrice::class),
+            'json'
+        );
+    }
+
+    public function getVariationSuppliers(int $itemId, int $variationId): array|Throwable
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_SUPPLIERS, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        $body = $this->getBodyContentsWithFixedDate($response);
+
+        return $this->getService()->getSerializer()->deserialize($body, sprintf('array<%s>', ItemVariationSupplier::class), 'json');
+    }
+
     public function getVariationsUpdatedSince(?DateTimeInterface $since): array
     {
         $query = [];
@@ -571,15 +420,6 @@ class ItemsProvider extends BaseProvider
         return $result;
     }
 
-    /**
-     * Item variations with relation updated
-     *
-     * @param DateTimeInterface|null $since
-     * @param array                  $with
-     *
-     * @return array|ItemVariation[]
-     * @throws Throwable
-     */
     public function getVariationsRelatedUpdatedSince(?DateTimeInterface $since, array $with = []): array
     {
         $query = [];
@@ -601,27 +441,8 @@ class ItemsProvider extends BaseProvider
         return $result;
     }
 
-    /**
-     * Put Stock Correction
-     *
-     * @param int $itemId
-     * @param int $variationId
-     * @param int $quantity
-     * @param int $warehouseId
-     * @param int $storageLocationId
-     * @param int $reason
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function putStockCorrection(
-        int $itemId,
-        int $variationId,
-        $quantity,
-        $warehouseId,
-        $storageLocationId,
-        $reason = Item::REASON_STOCK_CORRECTION
-    ) {
+    public function putStockCorrection(int $itemId, int $variationId, int $quantity, int $warehouseId, int $storageLocationId, int $reason = Item::REASON_STOCK_CORRECTION): bool|Throwable
+    {
         $response = $this->getResponse(
             Request::METHOD_PUT,
             sprintf(RestfulUrl::ITEM_VARIATION_STOCK_CORRECTION, $itemId, $variationId),
@@ -635,34 +456,15 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
     }
 
-    /**
-     * Put Stock Correction
-     *
-     * @param int $itemId
-     * @param int $variationId
-     * @param int $quantity
-     * @param int $warehouseId
-     * @param int $storageLocationId
-     * @param int $reason
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function putBookIncomingItems(
-        int $itemId,
-        int $variationId,
-        int $quantity,
-        int $warehouseId,
-        int $storageLocationId,
-        int $reason = Item::REASON_INCOMING_ITEMS
-    ) {
+    public function putBookIncomingItems(int $itemId, int $variationId, int $quantity, int $warehouseId, int $storageLocationId, int $reason = Item::REASON_INCOMING_ITEMS): bool|Throwable
+    {
         $response = $this->getResponse(
             Request::METHOD_PUT,
             sprintf(RestfulUrl::ITEM_VARIATION_BOOK_INCOMING_ITEMS, $itemId, $variationId),
@@ -678,28 +480,13 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
     }
 
-    /**
-     * Stock Redistribution
-     *
-     * @param int      $itemId
-     * @param int      $variationId
-     * @param int      $quantity
-     * @param int|null $currentStorageLocationId
-     * @param int|null $currentWarehouseId
-     * @param int      $newStorageLocationId
-     * @param int      $newWarehouseId
-     * @param int      $reason
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
     public function putStockRedistribute(
         int $itemId,
         int $variationId,
@@ -709,7 +496,7 @@ class ItemsProvider extends BaseProvider
         int $newStorageLocationId,
         int $newWarehouseId,
         $reason = Item::REASON_STOCK_REDISTRIBUTE
-    ) {
+    ): bool|Throwable {
         $request = [
             'reasonId'                 => $reason,
             'quantity'                 => $quantity,
@@ -727,23 +514,13 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
     }
 
-    /**
-     * Put item field
-     *
-     * @param int    $itemId
-     * @param string $field
-     * @param string $value
-     *
-     * @return Throwable|null
-     * @throws Throwable
-     */
     public function putItemField(int $itemId, string $field, string $value): ?Throwable
     {
         $response = $this->getResponse(
@@ -763,18 +540,7 @@ class ItemsProvider extends BaseProvider
         return null;
     }
 
-    /**
-     * Reorder level
-     *
-     * @param int $itemId
-     * @param int $variationId
-     * @param int $warehouseId
-     * @param int $reorderLevel
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function putReorderLevel($itemId, $variationId, $warehouseId, $reorderLevel)
+    public function putReorderLevel(int $itemId, int $variationId, int $warehouseId, int $reorderLevel): bool|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_PUT,
@@ -786,25 +552,14 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
     }
 
-    /**
-     * Reorder level
-     *
-     * @param int $itemId
-     * @param int $variationId
-     * @param int $warehouseId
-     * @param int $reorderLevel
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function postReorderLevel($itemId, $variationId, $warehouseId, $reorderLevel)
+    public function postReorderLevel(int $itemId, int $variationId, int $warehouseId, int $reorderLevel): bool|Throwable
     {
         $response = $this->getResponse(
             Request::METHOD_POST,
@@ -817,24 +572,14 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
     }
 
-    /**
-     * Shop position
-     *
-     * @param int $itemId
-     * @param int $variationId
-     * @param int $position
-     *
-     * @return bool|Exception|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function putShopPosition($itemId, $variationId, $position)
+    public function putShopPosition(int $itemId, int $variationId, int $position): bool|Throwable
     {
         $request = [
             'position' => $position,
@@ -848,26 +593,11 @@ class ItemsProvider extends BaseProvider
             ]
         );
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
         return true;
-    }
-
-    /**
-     * Append Variation Visibility Settings
-     *
-     * @param int   $itemId
-     * @param int   $variationId
-     * @param array $request
-     *
-     * @return array|Exception|mixed|ItemVariation
-     * @throws Throwable
-     */
-    public function appendVariationVisibilitySettingsToRequest(int $itemId, int $variationId, array $request)
-    {
-        return $request;
     }
 
     private function getBodyContentsWithFixedDate(ResponseInterface $response): string

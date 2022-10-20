@@ -5,21 +5,14 @@ namespace PM\PlentyMarketsBundle\Component\Model\Item;
 
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * Class ItemVariationSupplier
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Item
- */
 class ItemVariationSupplier
 {
     /**
-     * @var integer
-     *
      * @JMS\Type("integer")
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
-    private $id;
+    private int $id;
 
     /**
      * @var integer

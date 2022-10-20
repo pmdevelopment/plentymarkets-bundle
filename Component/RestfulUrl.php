@@ -1,19 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 10.07.2017
- * Time: 11:15
- */
 
 namespace PM\PlentyMarketsBundle\Component;
 
 
-/**
- * Class RestfulUrl
- *
- * @package PM\PlentyMarketsBundle\Component
- */
 class RestfulUrl
 {
     public const LOGIN = 'login';
@@ -41,6 +30,10 @@ class RestfulUrl
 
     public const ITEMS = 'items';
     public const ITEM = 'items/%d';
+    public const ITEM_BARCODES = 'items/barcodes';
+    public const ITEM_MANUFACTURERS = 'items/manufacturers';
+    public const ITEM_SALES_PRICE = 'items/sales_prices/%d';
+    public const ITEM_SHIPPING_PROFILES = 'items/%d/item_shipping_profiles';
     public const ITEM_VARIATION = 'items/%d/variations/%d';
     public const ITEM_VARIATION_STOCK = 'items/%d/variations/%d/stock';
     public const ITEM_VARIATION_BOOK_INCOMING_ITEMS = 'items/%d/variations/%d/stock/bookIncomingItems';
@@ -53,9 +46,6 @@ class RestfulUrl
     public const ITEM_VARIATION_WAREHOUSES_WAREHOUSE = 'items/%d/variations/%d/variation_warehouses/%d';
     public const ITEM_VARIATION_SUPPLIERS = 'items/%d/variations/%d/variation_suppliers';
     public const ITEM_VARIATIONS = 'items/variations';
-    public const ITEM_MANUFACTURERS = 'items/manufacturers';
-    public const ITEM_BARCODES = 'items/barcodes';
-    public const ITEM_SALES_PRICE = 'items/sales_prices/%d';
 
     public const PAYMENTS_METHODS = 'payments/methods';
 

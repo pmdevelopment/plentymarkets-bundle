@@ -11,10 +11,6 @@ namespace PM\PlentyMarketsBundle\Component\Model\Item;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * Class ItemText
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
  * @JMS\ExclusionPolicy("ALL")
  */
 class ItemText

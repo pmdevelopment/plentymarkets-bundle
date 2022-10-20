@@ -126,19 +126,10 @@ class OrdersProvider extends BaseProvider
         );
     }
 
-
-    /**
-     * Get Order status history
-     *
-     * @param int $orderId
-     *
-     * @return array|StatusHistoryEntry[]
-     * @throws Throwable
-     */
-    public function getStatusHistory($orderId)
+    public function getStatusHistory($orderId): array|Throwable
     {
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ORDER_STATUS_HISTORY, $orderId));
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
