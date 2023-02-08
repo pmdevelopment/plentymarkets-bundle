@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 10.07.2017
- * Time: 11:12
- */
 
 namespace PM\PlentyMarketsBundle\Services;
 
@@ -21,6 +15,7 @@ use PM\PlentyMarketsBundle\Component\Provider\AccountsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\BackendProvider;
 use PM\PlentyMarketsBundle\Component\Provider\BaseProvider;
 use PM\PlentyMarketsBundle\Component\Provider\CategoryProvider;
+use PM\PlentyMarketsBundle\Component\Provider\FulfilmentProvider;
 use PM\PlentyMarketsBundle\Component\Provider\ItemsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\OrdersProvider;
 use PM\PlentyMarketsBundle\Component\Provider\PaymentsProvider;
@@ -42,317 +37,163 @@ use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
 
-/**
- * Class RestfulService
- *
- * @package PM\PlentyMarketsBundle\Services
- */
 class RestfulService
 {
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
+    private AccessTokenRepository $accessTokenRepository;
+    private ApiHitsRepository $apiHitsRepository;
+    private ApiLockRepository $apiLockRepository;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
+    private SerializerInterface $serializer;
+    private EntityManagerInterface $entityManager;
+    private LimitHistoryRepository $limitHistoryRepository;
+    private LoggerInterface $logger;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
+    private bool $parameterGuzzleVerifySsl;
 
-    /**
-     * @var AccessTokenRepository
-     */
-    private $accessTokenRepository;
+    private Config $config;
 
-    /**
-     * @var ApiHitsRepository
-     */
-    private $apiHitsRepository;
-
-    /**
-     * @var ApiLockRepository
-     */
-    private $apiLockRepository;
-
-    /**
-     * @var LimitHistoryRepository
-     */
-    private $limitHistoryRepository;
-
-    /**
-     * @var Config
-     */
-    private $config;
-
-    /**
-     * @var bool
-     */
-    private $parameterGuzzleVerifySsl;
-
-    /**
-     * RestfulService constructor.
-     *
-     * @param ManagerRegistry     $registry
-     * @param SerializerInterface $serializer
-     * @param LoggerInterface     $logger
-     * @param bool                $parameterGuzzleVerifySsl
-     */
     public function __construct(
-        ManagerRegistry $registry,
+        AccessTokenRepository $accessTokenRepository,
+        ApiHitsRepository $apiHitsRepository,
+        ApiLockRepository $apiLockRepository,
         SerializerInterface $serializer,
+        EntityManagerInterface $entityManager,
+        LimitHistoryRepository $limitHistoryRepository,
         LoggerInterface $logger,
-        $parameterGuzzleVerifySsl
+        bool $parameterGuzzleVerifySsl
     ) {
+        $this->accessTokenRepository = $accessTokenRepository;
+        $this->apiHitsRepository = $apiHitsRepository;
+        $this->apiLockRepository = $apiLockRepository;
         $this->serializer = $serializer;
+        $this->entityManager = $entityManager;
+        $this->limitHistoryRepository = $limitHistoryRepository;
         $this->logger = $logger;
-        $this->entityManager = $registry->getManager();
-
-        $this->accessTokenRepository = $registry->getRepository(AccessToken::class);
-        $this->apiHitsRepository = $registry->getRepository(ApiHits::class);
-        $this->apiLockRepository = $registry->getRepository(ApiLock::class);
-        $this->limitHistoryRepository = $registry->getRepository(LimitHistory::class);
-
         $this->parameterGuzzleVerifySsl = $parameterGuzzleVerifySsl;
     }
 
-    /**
-     * @return bool
-     */
-    public function isParameterGuzzleVerifySsl()
-    {
-        return $this->parameterGuzzleVerifySsl;
-    }
-
-    /**
-     * @return EntityManagerInterface
-     */
     public function getEntityManager(): EntityManagerInterface
     {
         return $this->entityManager;
     }
 
-    /**
-     * @return SerializerInterface
-     */
     public function getSerializer(): SerializerInterface
     {
         return $this->serializer;
     }
 
-    /**
-     * @return LoggerInterface
-     */
     public function getLogger(): LoggerInterface
     {
         return $this->logger;
     }
 
-    /**
-     * @return ApiLockRepository
-     */
     public function getApiLockRepository(): ApiLockRepository
     {
         return $this->apiLockRepository;
     }
 
-    /**
-     * @return LimitHistoryRepository
-     */
     public function getLimitHistoryRepository(): LimitHistoryRepository
     {
         return $this->limitHistoryRepository;
     }
 
-    /**
-     * @return Config
-     */
-    public function getConfig()
+    public function getConfig(): Config
     {
         return $this->config;
     }
 
-    /**
-     * @param Config $config
-     *
-     * @return RestfulService
-     */
-    public function setConfig($config)
+
+    public function accounts(Config $config): AccountsProvider
     {
         $this->config = $config;
-
-        return $this;
-    }
-
-    /**
-     * Orders
-     *
-     * @param Config $config
-     *
-     * @return AccountsProvider
-     * @throws Throwable
-     */
-    public function accounts(Config $config)
-    {
-        $this->setConfig($config);
         $client = $this->login();
 
         return new AccountsProvider($client, $this);
     }
 
-    /**
-     * Backend
-     *
-     * @param Config $config
-     *
-     * @return BackendProvider
-     * @throws Throwable
-     */
-    public function backend(Config $config)
+    public function backend(Config $config): BackendProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
         return new BackendProvider($client, $this);
     }
 
-    /**
-     * Base
-     *
-     * @param Config $config
-     *
-     * @return BaseProvider
-     * @throws Throwable
-     */
-    public function base(Config $config)
+    public function base(Config $config): BaseProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
         return new BaseProvider($client, $this);
     }
 
-    /**
-     * @param Config $config
-     *
-     * @return CategoryProvider
-     * @throws Throwable
-     */
     public function categories(Config $config): CategoryProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
         return new CategoryProvider($client, $this);
     }
 
-    /**
-     * Orders
-     *
-     * @param Config $config
-     *
-     * @return OrdersProvider
-     * @throws Throwable
-     */
-    public function orders(Config $config)
+    public function fulfilment(Config $config): FulfilmentProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
-        return new OrdersProvider($client, $this);
+        return new FulfilmentProvider($client, $this);
     }
 
-    /**
-     * Items
-     *
-     * @param Config $config
-     *
-     * @return ItemsProvider
-     * @throws Throwable
-     */
-    public function items(Config $config)
+    public function items(Config $config): ItemsProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
         return new ItemsProvider($client, $this);
     }
 
-    /**
-     * Payments
-     *
-     * @param Config $config
-     *
-     * @return PaymentsProvider
-     * @throws Throwable
-     */
-    public function payments(Config $config)
+    public function orders(Config $config): OrdersProvider
     {
-        $this->setConfig($config);
+        $this->config = $config;
+        $client = $this->login();
+
+        return new OrdersProvider($client, $this);
+    }
+
+
+    public function payments(Config $config): PaymentsProvider
+    {
+        $this->config = $config;
         $client = $this->login();
 
         return new PaymentsProvider($client, $this);
     }
 
-    /**
-     * @param Config $config
-     *
-     * @return TagsProvider
-     * @throws Throwable
-     */
-    public function tags(Config $config): TagsProvider
+    public function stockManagement(Config $config): StockManagementProvider
     {
-        $this->setConfig($config);
-        $client = $this->login();
-
-        return new TagsProvider($client, $this);
-    }
-
-    /**
-     * Warehouse
-     *
-     * @param Config $config
-     *
-     * @return WarehousesProvider
-     * @throws Throwable
-     */
-    public function warehouse(Config $config)
-    {
-        $this->setConfig($config);
-        $client = $this->login();
-
-        return new WarehousesProvider($client, $this);
-    }
-
-    /**
-     * Stock Management
-     *
-     * @param Config $config
-     *
-     * @return StockManagementProvider
-     * @throws Throwable
-     */
-    public function stockManagement(Config $config)
-    {
-        $this->setConfig($config);
+        $this->config = $config;
         $client = $this->login();
 
         return new StockManagementProvider($client, $this);
     }
 
-    /**
-     * Login: Returns access token if valid login
-     *
-     * @param null|Config $config
-     *
-     * @return Client
-     * @throws Throwable
-     */
-    public function login($config = null)
+    public function tags(Config $config): TagsProvider
+    {
+        $this->config = $config;
+        $client = $this->login();
+
+        return new TagsProvider($client, $this);
+    }
+
+
+    public function warehouse(Config $config): WarehousesProvider
+    {
+        $this->config = $config;
+        $client = $this->login();
+
+        return new WarehousesProvider($client, $this);
+    }
+
+    public function login(?Config $config = null): Client
     {
         if (null === $config) {
             $config = $this->getConfig();
@@ -363,7 +204,7 @@ class RestfulService
         return new Client(
             [
                 'base_uri' => $uri,
-                'verify'   => $this->isParameterGuzzleVerifySsl(),
+                'verify'   => $this->parameterGuzzleVerifySsl,
                 'headers'  => [
                     'Accept'                             => 'application/x.plentymarkets.v1+json',
                     'Authorization'                      => sprintf(
@@ -384,21 +225,12 @@ class RestfulService
         );
     }
 
-    /**
-     * Get Login Response
-     *
-     * @param string $uri
-     * @param string $username
-     * @param string $password
-     *
-     * @return mixed|ResponseInterface|Throwable
-     */
-    public function getLoginResponse($uri, $username, $password)
+    public function getLoginResponse(string $uri, string $username, string $password): Throwable|ResponseInterface
     {
         $client = new Client(
             [
                 'base_uri' => $uri,
-                'verify'   => $this->isParameterGuzzleVerifySsl(),
+                'verify'   => $this->parameterGuzzleVerifySsl,
             ]
         );
 
@@ -421,17 +253,7 @@ class RestfulService
     }
 
 
-    /**
-     * Get Access Token
-     *
-     * @param string $uri
-     * @param string $username
-     * @param string $password
-     *
-     * @return mixed
-     * @throws Throwable
-     */
-    public function getAccessToken($uri, $username, $password)
+    public function getAccessToken(string $uri, string $username, string $password): string
     {
         $api = ServiceHelper::createApiId($uri, $username, $password);
         $token = $this->accessTokenRepository->findOneByApi($api);
@@ -455,16 +277,7 @@ class RestfulService
         return $token;
     }
 
-    /**
-     * Save AccessToken
-     *
-     * @param string $api
-     * @param string $token
-     * @param int    $expires
-     *
-     * @return Throwable|RestfulService
-     */
-    public function saveAccessToken($api, $token, $expires)
+    public function saveAccessToken(string $api, string $token, int $expires): Throwable|RestfulService
     {
         try {
             $now = new DateTime();
@@ -485,18 +298,7 @@ class RestfulService
         return $this;
     }
 
-
-    /**
-     * Get Statistics
-     *
-     * @param string $internalApiId
-     * @param int    $responseStatusCode
-     * @param bool   $flushEntities
-     *
-     * @return Throwable|RestfulService
-     * @throws Throwable
-     */
-    public function increaseStatistics(string $internalApiId, int $responseStatusCode, bool $flushEntities = true)
+    public function increaseStatistics(string $internalApiId, int $responseStatusCode, bool $flushEntities = true): Throwable|RestfulService
     {
         $now = new DateTime();
 
@@ -521,14 +323,7 @@ class RestfulService
         return $this;
     }
 
-    /**
-     * Get base uri
-     *
-     * @param string $uri
-     *
-     * @return string
-     */
-    public static function getBaseUri($uri)
+    public static function getBaseUri(string $uri): string
     {
         if ('/' !== substr($uri, -1)) {
             $uri = sprintf('%s/', $uri);

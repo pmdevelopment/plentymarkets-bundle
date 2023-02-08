@@ -29,11 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
 
-/**
- * Class BaseProvider
- *
- * @package PM\PlentyMarketsBundle\Component\Provider
- */
 class BaseProvider
 {
     public const HEADER_LONG_PERIOD_LIMIT = 'X-Plenty-Global-Long-Period-Limit';
@@ -46,64 +41,33 @@ class BaseProvider
 
     public const HEADER_INTERNAL_API_ID = 'X-Internal-Api-Id';
 
-    /**
-     * @var Client
-     */
-    private $client;
+    private Client $client;
 
-    /**
-     * @var RestfulService
-     */
-    private $service;
+    private RestfulService $service;
 
-    /**
-     * OrdersProvider constructor.
-     *
-     * @param Client         $client
-     * @param RestfulService $service
-     */
     public function __construct(Client $client, RestfulService $service)
     {
         $this->client = $client;
         $this->service = $service;
     }
 
-    /**
-     * @return Client
-     */
-    public function getClient()
+    public function getClient(): Client
     {
         return $this->client;
     }
 
-    /**
-     * @return RestfulService
-     */
-    public function getService()
+    public function getService(): RestfulService
     {
         return $this->service;
     }
 
-    /**
-     * @param Client $client
-     *
-     * @return BaseProvider
-     */
-    public function setClient($client)
+    public function setClient(Client $client): self
     {
         $this->client = $client;
 
         return $this;
     }
 
-    /**
-     * Get Batch result
-     *
-     * @param Batch $batch
-     *
-     * @return Throwable[]|ResponseInterface[]|array
-     * @throws Throwable
-     */
     public function getBatchResult(Batch $batch): array
     {
         $pageCount = $batch->getPageCount();
@@ -128,28 +92,8 @@ class BaseProvider
         return $result;
     }
 
-
-    /**
-     * Get Response. Login again if unauthorized
-     *
-     * @param string     $method
-     * @param string     $path
-     * @param array      $options
-     * @param bool|false $final
-     * @param bool       $ignoreLock
-     * @param bool       $flushEntities
-     *
-     * @return Throwable|mixed|ResponseInterface
-     * @throws Throwable
-     */
-    public function getResponse(
-        string $method,
-        string $path,
-        array $options = [],
-        bool $final = false,
-        bool $ignoreLock = false,
-        bool $flushEntities = true
-    ) {
+    public function getResponse(string $method, string $path, array $options = [], bool $final = false, bool $ignoreLock = false, bool $flushEntities = true): Throwable|ResponseInterface
+    {
         /* Option to skip for better performance */
         if (
             (true === defined('__FULL_SPEED_API') && true === __FULL_SPEED_API) ||
@@ -243,24 +187,16 @@ class BaseProvider
         return $response;
     }
 
-    /**
-     * Save Request Limits
-     *
-     * @param array  $responseHeaders
-     * @param string $path
-     * @param bool   $shortLimitException
-     *
-     * @param bool   $flushEntities
-     *
-     * @return bool
-     * @throws Exception
-     */
-    private function saveRequestLimits(
-        array $responseHeaders,
-        string $path,
-        bool $shortLimitException = false,
-        bool $flushEntities = true
-    ): bool {
+    public function getBodyContentsWithFixedDate(ResponseInterface $response): string
+    {
+        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
+        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
+
+        return $body;
+    }
+
+    private function saveRequestLimits(array $responseHeaders, string $path, bool $shortLimitException = false, bool $flushEntities = true): bool
+    {
         $path = explode('/', $path);
         $basePath = reset($path);
 
@@ -342,15 +278,6 @@ class BaseProvider
         return true;
     }
 
-    /**
-     * Create ApiLimit
-     *
-     * @param int    $decayTime
-     * @param string $internalApiId
-     * @param string $lockType
-     *
-     * @throws Exception
-     */
     private function createApiLock(int $decayTime, string $internalApiId, string $lockType): void
     {
         $lock = new ApiLock();

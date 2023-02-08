@@ -17,16 +17,7 @@ class RestfulUrl
 
     public const BACKEND_USERS = 'backend/users';
 
-    public const ORDER = 'orders/%d';
-    public const ORDER_DATE_TYPES = 'orders/dates/types';
-    public const ORDER_ITEM = 'orders/%d/items/%d';
-    public const ORDER_PROPERTY = 'orders/%d/properties/%d';
-    public const ORDER_PROPERTY_TYPE = 'orders/properties/types/%d';
-    public const ORDER_REFERRERS = 'orders/referrers';
-    public const ORDER_SHIPPING_PACKAGES = 'orders/%d/shipping/packages';
-    public const ORDER_SHIPPING_PRESETS = 'orders/shipping/presets';
-    public const ORDER_STATUS_HISTORY = 'orders/%d/status-history';
-    public const ORDERS = 'orders';
+    public const FULFILMENT_PICKLIST = 'fulfillment/picklist/%d';
 
     public const ITEMS = 'items';
     public const ITEM = 'items/%d';
@@ -46,6 +37,18 @@ class RestfulUrl
     public const ITEM_VARIATION_WAREHOUSES_WAREHOUSE = 'items/%d/variations/%d/variation_warehouses/%d';
     public const ITEM_VARIATION_SUPPLIERS = 'items/%d/variations/%d/variation_suppliers';
     public const ITEM_VARIATIONS = 'items/variations';
+
+    public const ORDER = 'orders/%d';
+    public const ORDER_DATE_TYPES = 'orders/dates/types';
+    public const ORDER_ITEM = 'orders/%d/items/%d';
+    public const ORDER_PROPERTY = 'orders/%d/properties/%d';
+    public const ORDER_PROPERTY_TYPE = 'orders/properties/types/%d';
+    public const ORDER_REFERRERS = 'orders/referrers';
+    public const ORDER_SHIPPING_PACKAGES = 'orders/%d/shipping/packages';
+    public const ORDER_SHIPPING_PRESETS = 'orders/shipping/presets';
+    public const ORDER_STATUS_HISTORY = 'orders/%d/status-history';
+    public const ORDERS = 'orders';
+
 
     public const PAYMENTS_METHODS = 'payments/methods';
 

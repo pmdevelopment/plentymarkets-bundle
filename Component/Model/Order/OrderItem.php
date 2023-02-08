@@ -1,23 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 11.07.2017
- * Time: 13:02
- */
 
 namespace PM\PlentyMarketsBundle\Component\Model\Order;
 
-use DateTime;
+use DateTimeInterface;
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * Class OrderItem
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
- * @JMS\ExclusionPolicy("ALL")
- */
 class OrderItem
 {
     const TYPE_VARIATION = 1;
@@ -32,495 +19,151 @@ class OrderItem
     const TYPE_DEPOSIT = 10;
     const TYPE_ORDER = 11;
 
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $id;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $orderId;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $typeId;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $referrerId;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $itemVariationId;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $quantity;
-    /**
-     * @var int
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $orderItemName;
-    /**
-     * @var int
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $attributeValues;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $shippingProfileId;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $vatField;
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $vatRate;
-    /**
-     * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $createdAt;
-    /**
-     * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $updatedAt;
+    #[JMS\Type("integer")]
+    private int $id;
 
-    /**
-     * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $warehouseId;
+    #[JMS\Type("integer")]
+    private int $orderId;
 
-    /**
-     * @var OrderItemAmount[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemAmount>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $amounts;
+    #[JMS\Type("integer")]
+    private ?int $typeId = null;
 
-    /**
-     * @var OrderItemProperty[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemProperty>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $properties;
+    #[JMS\Type("integer")]
+    private ?int $referrerId = null;
 
-    /**
-     * @var OrderItemReference[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemReference>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private $references;
+    #[JMS\Type("integer")]
+    private ?int $itemVariationId = null;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    #[JMS\Type("integer")]
+    private ?int $quantity = null;
+
+    #[JMS\Type("string")]
+    private ?string $orderItemName = null;
+
+    #[JMS\Type("string")]
+    private ?string $attributeValues = null;
+
+    #[JMS\Type("integer")]
+    private ?int $shippingProfileId = null;
+
+    #[JMS\Type("integer")]
+    private ?int $vatField = null;
+
+    #[JMS\Type("integer")]
+    private ?int $vatRate = null;
+
+    #[JMS\Type("DateTime")]
+    private ?DateTimeInterface $createdAt = null;
+
+    #[JMS\Type("DateTime")]
+    private ?DateTimeInterface $updatedAt = null;
+
+    #[JMS\Type("integer")]
+    private ?int $warehouseId = null;
+
+    #[JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemAmount>")]
+    private array $amounts = [];
+
+    #[JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemProperty>")]
+    private array $properties = [];
+
+    #[JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemReference>")]
+    private array $references = [];
+
+    #[JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItemWarehouseLocation>")]
+    private array $warehouseLocations = [];
+
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     *
-     * @return OrderItem
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrderId()
+    public function getOrderId(): int
     {
         return $this->orderId;
     }
 
-    /**
-     * @param int $orderId
-     *
-     * @return OrderItem
-     */
-    public function setOrderId($orderId)
-    {
-        $this->orderId = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTypeId()
+    public function getTypeId(): ?int
     {
         return $this->typeId;
     }
 
-    /**
-     * @param int $typeId
-     *
-     * @return OrderItem
-     */
-    public function setTypeId($typeId)
-    {
-        $this->typeId = $typeId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getReferrerId()
+    public function getReferrerId(): ?int
     {
         return $this->referrerId;
     }
 
-    /**
-     * @param int $referrerId
-     *
-     * @return OrderItem
-     */
-    public function setReferrerId($referrerId)
-    {
-        $this->referrerId = $referrerId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getItemVariationId()
+    public function getItemVariationId(): ?int
     {
         return $this->itemVariationId;
     }
 
-    /**
-     * @param int $itemVariationId
-     *
-     * @return OrderItem
-     */
-    public function setItemVariationId($itemVariationId)
-    {
-        $this->itemVariationId = $itemVariationId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
 
-    /**
-     * @param int $quantity
-     *
-     * @return OrderItem
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOrderItemName()
+    public function getOrderItemName(): ?string
     {
         return $this->orderItemName;
     }
 
-    /**
-     * @param int $orderItemName
-     *
-     * @return OrderItem
-     */
-    public function setOrderItemName($orderItemName)
-    {
-        $this->orderItemName = $orderItemName;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getAttributeValues()
+    public function getAttributeValues(): ?string
     {
         return $this->attributeValues;
     }
 
-    /**
-     * @param int $attributeValues
-     *
-     * @return OrderItem
-     */
-    public function setAttributeValues($attributeValues)
-    {
-        $this->attributeValues = $attributeValues;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getShippingProfileId()
+    public function getShippingProfileId(): ?int
     {
         return $this->shippingProfileId;
     }
 
-    /**
-     * @param int $shippingProfileId
-     *
-     * @return OrderItem
-     */
-    public function setShippingProfileId($shippingProfileId)
-    {
-        $this->shippingProfileId = $shippingProfileId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVatField()
+    public function getVatField(): ?int
     {
         return $this->vatField;
     }
 
-    /**
-     * @param int $vatField
-     *
-     * @return OrderItem
-     */
-    public function setVatField($vatField)
-    {
-        $this->vatField = $vatField;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getVatRate()
+    public function getVatRate(): ?int
     {
         return $this->vatRate;
     }
 
-    /**
-     * @param int $vatRate
-     *
-     * @return OrderItem
-     */
-    public function setVatRate($vatRate)
-    {
-        $this->vatRate = $vatRate;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTime $createdAt
-     *
-     * @return OrderItem
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param DateTime $updatedAt
-     *
-     * @return OrderItem
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getWarehouseId(): int
+    public function getWarehouseId(): ?int
     {
         return $this->warehouseId;
     }
 
-    /**
-     * @param int $warehouseId
-     *
-     * @return OrderItem
-     */
-    public function setWarehouseId(int $warehouseId): OrderItem
-    {
-        $this->warehouseId = $warehouseId;
-
-        return $this;
-    }
-
-    /**
-     * @return OrderItemAmount[]
-     */
-    public function getAmounts()
+    public function getAmounts(): array
     {
         return $this->amounts;
     }
 
-    /**
-     * @param OrderItemAmount[] $amounts
-     *
-     * @return OrderItem
-     */
-    public function setAmounts($amounts)
-    {
-        $this->amounts = $amounts;
-
-        return $this;
-    }
-
-    /**
-     * @return OrderItemProperty[]
-     */
-    public function getProperties()
+    public function getProperties(): array
     {
         return $this->properties;
     }
 
-    /**
-     * @param OrderItemProperty[] $properties
-     *
-     * @return OrderItem
-     */
-    public function setProperties($properties)
-    {
-        $this->properties = $properties;
-
-        return $this;
-    }
-
-    /**
-     * @return OrderItemReference[]
-     */
     public function getReferences(): array
     {
         return $this->references;
     }
 
-    /**
-     * @param OrderItemReference[] $references
-     *
-     * @return OrderItem
-     */
-    public function setReferences(array $references): OrderItem
+    public function getWarehouseLocations(): array
     {
-        $this->references = $references;
-
-        return $this;
+        return $this->warehouseLocations;
     }
 
-    /**
-     * Get Amount Euro
-     *
-     * @param $currency
-     *
-     * @return null|OrderItemAmount
-     */
-    public function getAmountByCurrency($currency)
+    public function getAmountByCurrency(string $currency): ?OrderItemAmount
     {
         foreach ($this->getAmounts() as $amount) {
             if ($currency === $amount->getCurrency()) {
@@ -531,19 +174,8 @@ class OrderItem
         return null;
     }
 
-    /**
-     * Get Property By Type Id
-     *
-     * @param int $typeId
-     *
-     * @return OrderItemProperty|null
-     */
-    public function getPropertyByTypeId($typeId)
+    public function getPropertyByTypeId($typeId): ?OrderItemProperty
     {
-        if (false === is_array($this->properties)) {
-            return null;
-        }
-
         foreach ($this->getProperties() as $property) {
             if ($typeId === $property->getTypeId()) {
                 return $property;

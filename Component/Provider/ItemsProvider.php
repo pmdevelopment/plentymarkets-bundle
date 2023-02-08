@@ -599,12 +599,4 @@ class ItemsProvider extends BaseProvider
 
         return true;
     }
-
-    private function getBodyContentsWithFixedDate(ResponseInterface $response): string
-    {
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
-
-        return $body;
-    }
 }

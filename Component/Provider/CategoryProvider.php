@@ -11,11 +11,6 @@ use PM\PlentyMarketsBundle\Component\RestfulUrl;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
-/**
- * Class CategoryProvider
- *
- * @package PM\PlentyMarketsBundle\Component\Provider
- */
 class CategoryProvider extends BaseProvider
 {
     /**

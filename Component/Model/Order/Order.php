@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 12.07.2017
- * Time: 08:56
- */
 
 namespace PM\PlentyMarketsBundle\Component\Model\Order;
 
@@ -12,13 +6,6 @@ use DateTime;
 use JMS\Serializer\Annotation as JMS;
 use PM\PlentyMarketsBundle\Component\Model\Account\Address;
 
-/**
- * Class Order
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
- * @JMS\ExclusionPolicy("all")
- */
 class Order
 {
     public const TYPE_SALE = 1;

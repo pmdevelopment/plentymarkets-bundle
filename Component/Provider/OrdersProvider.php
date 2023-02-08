@@ -60,16 +60,7 @@ class OrdersProvider extends BaseProvider
         return array_merge($data->getEntries(), $merged);
     }
 
-    /**
-     * Get Order By Id
-     *
-     * @param int   $orderId
-     * @param array $query
-     *
-     * @return array|Throwable|object|Order
-     * @throws Throwable
-     */
-    public function getById(int $orderId, array $query = [])
+    public function getById(int $orderId, array $query = []): Throwable|Order
     {
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ORDER, $orderId), ['query' => $query]);
 
@@ -302,13 +293,5 @@ class OrdersProvider extends BaseProvider
         }
 
         return true;
-    }
-
-    private function getBodyContentsWithFixedDate(ResponseInterface $response): string
-    {
-        $body = str_replace('-0001-11-30T00:00:00+01:00', '0000-00-00T00:00:00+01:00', $response->getBody()->getContents());
-        $body = str_replace('-0001-11-30T00:00:00+00:53', '0000-00-00T00:00:00+01:00', $body);
-
-        return $body;
     }
 }
