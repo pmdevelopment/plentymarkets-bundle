@@ -537,6 +537,11 @@ class ItemVariation
     private $images;
 
     /**
+     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemImage>")
+     */
+    private array $itemImages = [];
+
+    /**
      * @var array|ItemVariationBarcode[]
      *
      * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationBarcode>")
@@ -1708,6 +1713,18 @@ class ItemVariation
     public function setImages($images)
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getItemImages(): array
+    {
+        return $this->itemImages;
+    }
+
+    public function setItemImages(array $itemImages): ItemVariation
+    {
+        $this->itemImages = $itemImages;
 
         return $this;
     }

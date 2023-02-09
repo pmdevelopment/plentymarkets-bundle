@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 12.07.2017
- * Time: 11:32
- */
 
 namespace PM\PlentyMarketsBundle\Component\Response;
 
@@ -12,10 +6,6 @@ use JMS\Serializer\Annotation as JMS;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariation;
 
 /**
- * Class ItemsResponse
- *
- * @package PM\PlentyMarketsBundle\Component\Response
- *
  * @JMS\ExclusionPolicy("ALL")
  */
 class ItemsVariationsResponse extends PaginationResponse
@@ -27,7 +17,7 @@ class ItemsVariationsResponse extends PaginationResponse
      * @JMS\Expose()
      * @JMS\Since("1.0")
      */
-    private $entries;
+    private array $entries = [];
 
     /**
      * @return ItemVariation[]

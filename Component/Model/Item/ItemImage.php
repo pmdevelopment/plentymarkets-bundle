@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: sjoder
- * Date: 10.12.2018
- * Time: 14:27
- */
 
 namespace PM\PlentyMarketsBundle\Component\Model\Item;
 
@@ -12,10 +6,6 @@ use DateTime;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * Class ItemImage
- *
- * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
  * @JMS\ExclusionPolicy("ALL")
  */
 class ItemImage

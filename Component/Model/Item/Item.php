@@ -1633,7 +1633,7 @@ class Item
     /**
      * @return ItemImage[]
      */
-    public function getItemImages()
+    public function getItemImages(): array
     {
         return $this->itemImages;
     }
@@ -1643,7 +1643,7 @@ class Item
      *
      * @return Item
      */
-    public function setItemImages($itemImages)
+    public function setItemImages(array $itemImages)
     {
         $this->itemImages = $itemImages;
 
