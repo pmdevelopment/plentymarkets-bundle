@@ -244,7 +244,10 @@ class ItemsProvider extends BaseProvider
 
     public function getUpdatedSince(?DateTimeInterface $since): array
     {
-        $query = [];
+        $query = [
+            'with' => 'itemImages',
+        ];
+
         if (null !== $since) {
             $query['updatedBetween'] = $since->getTimestamp();
         } else {
