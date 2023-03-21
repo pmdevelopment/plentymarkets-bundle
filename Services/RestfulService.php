@@ -300,26 +300,6 @@ class RestfulService
 
     public function increaseStatistics(string $internalApiId, int $responseStatusCode, bool $flushEntities = true): Throwable|RestfulService
     {
-        $now = new DateTime();
-
-        $statistic = $this->apiHitsRepository->findCurrent($internalApiId);
-        if (null === $statistic) {
-            $statistic = new ApiHits();
-            $statistic
-                ->setDay($now)
-                ->setApiId($internalApiId);
-        }
-
-        $statistic
-            ->countIncrease()
-            ->responseCodeIncrease($responseStatusCode);
-
-        $this->entityManager->persist($statistic);
-
-        if (true === $flushEntities) {
-            $this->entityManager->flush();
-        }
-
         return $this;
     }
 
