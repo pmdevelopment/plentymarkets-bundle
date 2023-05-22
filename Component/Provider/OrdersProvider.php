@@ -22,14 +22,8 @@ use Throwable;
 
 class OrdersProvider extends BaseProvider
 {
-    /**
-     * @param DateTimeInterface $updatedAt
-     * @param int               $page
-     *
-     * @return array|Throwable|array|Order[]
-     * @throws Throwable
-     */
-    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, int $page = 1)
+
+    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, int $page = 1): Throwable|OrderResponse
     {
         $options = [
             'query' => [
@@ -47,17 +41,7 @@ class OrdersProvider extends BaseProvider
         $body = $this->getBodyContentsWithFixedDate($response);
         $data = $this->getService()->getSerializer()->deserialize($body, OrderResponse::class, 'json');
 
-        if (true === $data->isIsLastPage()) {
-            return $data->getEntries();
-        }
-
-        /* Get other pages */
-        $merged = $this->findUpdatedAtFrom($updatedAt, $page + 1);
-        if ($merged instanceof Throwable) {
-            return $merged;
-        }
-
-        return array_merge($data->getEntries(), $merged);
+        return $data;
     }
 
     public function getById(int $orderId, array $query = []): Throwable|Order
