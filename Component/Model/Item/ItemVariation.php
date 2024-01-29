@@ -186,6 +186,13 @@ class ItemVariation
     private $purchasePrice;
 
     /**
+     * @JMS\Type("float")
+     * @JMS\Expose()
+     * @JMS\Since("1.0")
+     */
+    private ?float $movingAveragePrice = null;
+
+    /**
      * @var DateTime
      *
      * @JMS\Type("DateTime")
@@ -933,6 +940,18 @@ class ItemVariation
     public function setPurchasePrice($purchasePrice)
     {
         $this->purchasePrice = $purchasePrice;
+
+        return $this;
+    }
+
+    public function getMovingAveragePrice(): ?float
+    {
+        return $this->movingAveragePrice;
+    }
+
+    public function setMovingAveragePrice(?float $movingAveragePrice): ItemVariation
+    {
+        $this->movingAveragePrice = $movingAveragePrice;
 
         return $this;
     }

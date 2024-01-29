@@ -30,6 +30,8 @@ class OrdersProvider extends BaseProvider
                 'updatedAtFrom' => $updatedAt->format('c'),
                 'itemsPerPage'  => 250,
                 'page'          => $page,
+                'sortBy'        => 'id',
+                'sortOrder'     => 'asc',
             ],
         ];
 
