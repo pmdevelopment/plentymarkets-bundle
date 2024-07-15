@@ -43,8 +43,6 @@ class AccountsProvider extends BaseProvider
     /**
      * Get Contacts
      *
-     * @param int   $page
-     * @param array $query
      *
      * @return array|Exception|mixed|Contact[]
      */
@@ -94,7 +92,6 @@ class AccountsProvider extends BaseProvider
     /**
      * Get Contacts (Updated Since Date)
      *
-     * @param DateTimeInterface|null $since
      *
      * @return array|Exception|mixed|Contact[]
      * @throws Exception

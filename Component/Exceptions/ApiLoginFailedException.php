@@ -16,9 +16,6 @@ use Throwable;
  */
 class ApiLoginFailedException extends Exception implements Throwable, ApiException
 {
-    /**
-     * @return int
-     */
     public function getInternalCode(): int
     {
         return ErrorHelper::CODE_LOGIN_FAILED;

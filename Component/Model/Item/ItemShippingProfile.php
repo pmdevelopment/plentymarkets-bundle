@@ -7,28 +7,20 @@ use JMS\Serializer\Annotation as JMS;
 
 class ItemShippingProfile
 {
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Since('1.0')]
     private int $id;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Since('1.0')]
     private int $itemId;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Since('1.0')]
     private int $profileId;
 
-    /**
-     * @JMS\Type("DateTime")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('DateTime')]
+    #[JMS\Since('1.0')]
     private DateTimeInterface $updatedAt;
 
     public function getId(): int

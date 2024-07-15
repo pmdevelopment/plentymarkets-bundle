@@ -23,16 +23,14 @@ class ResponseHelper
     /**
      * Get error as string
      *
-     * @param Throwable $input
      *
-     * @return string
      */
     public static function getErrorString(Throwable $input): string
     {
         if ($input instanceof RequestException && null !== $input->getResponse()) {
             try {
                 $json = \GuzzleHttp\json_decode($input->getResponse()->getBody()->getContents(), true);
-            } catch (\InvalidArgumentException $exception) {
+            } catch (\InvalidArgumentException) {
                 return 'No valid API response';
             }
 
@@ -57,9 +55,7 @@ class ResponseHelper
     /**
      * Resource not found exception?
      *
-     * @param Throwable $throwable
      *
-     * @return bool
      */
     public static function isResourceNotFoundException(Throwable $throwable): bool
     {

@@ -14,9 +14,8 @@ use JMS\Serializer\Annotation as JMS;
  * Class OrderProperty
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class OrderProperty
 {
     public const TYPE_WAREHOUSE = 1;
@@ -43,29 +42,26 @@ class OrderProperty
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $orderId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $typeId;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $value;
 
     /**

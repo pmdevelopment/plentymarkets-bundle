@@ -20,10 +20,10 @@ class OrderItem
     const TYPE_ORDER = 11;
 
     #[JMS\Type("integer")]
-    private int $id;
+    private readonly int $id;
 
     #[JMS\Type("integer")]
-    private int $orderId;
+    private readonly int $orderId;
 
     #[JMS\Type("integer")]
     private ?int $typeId = null;

@@ -17,10 +17,7 @@ class Orders
     /**
      * Delete Order Item
      *
-     * @param int $orderId
-     * @param int $orderItemId
      *
-     * @return Payload
      */
     public static function deleteOrderItem(int $orderId, int $orderItemId): Payload
     {
@@ -35,10 +32,7 @@ class Orders
     /**
      * Get StatusId Update
      *
-     * @param int    $orderId
-     * @param string $newStatusId
      *
-     * @return Payload
      */
     public static function postStatusId(int $orderId, string $newStatusId): Payload
     {

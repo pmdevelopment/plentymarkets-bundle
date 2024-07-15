@@ -15,72 +15,64 @@ use JMS\Serializer\Annotation as JMS;
  * Class BaseAddress
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Base
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class BaseAddress
 {
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $name1;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $address1;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $address2;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $postalCode;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $town;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $countryId;
 
     /**
      * @var array
-     *
-     * @JMS\Type("array")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $options;
 
     /**

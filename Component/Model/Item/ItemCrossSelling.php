@@ -14,45 +14,40 @@ use JMS\Serializer\Annotation as JMS;
  * Class ItemCrossSelling
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class ItemCrossSelling
 {
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $crossItemId;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $relationship;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isDynamic;
 
     /**

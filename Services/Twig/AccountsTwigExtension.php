@@ -24,18 +24,10 @@ use Twig\TwigFilter;
 class AccountsTwigExtension extends AbstractExtension
 {
     /**
-     * @var RestfulService
-     */
-    private $restfulService;
-
-    /**
      * AccountsTwigExtension constructor.
-     *
-     * @param RestfulService $restfulService
      */
-    public function __construct(RestfulService $restfulService)
+    public function __construct(private readonly RestfulService $restfulService)
     {
-        $this->restfulService = $restfulService;
     }
 
     /**
@@ -60,7 +52,6 @@ class AccountsTwigExtension extends AbstractExtension
      * Get Contact By Id
      *
      * @param int     $id
-     * @param Project $project
      *
      * @return Throwable|Contact
      */

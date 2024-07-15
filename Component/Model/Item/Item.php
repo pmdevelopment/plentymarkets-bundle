@@ -9,9 +9,8 @@ use JMS\Serializer\Annotation as JMS;
  * Class Item
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class Item
 {
     public const FIELD_FREE2 = 'free2';
@@ -26,508 +25,452 @@ class Item
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $position;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemType;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $stockType;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $storeSpecial;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ownerId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $manufacturerId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $producingCountryId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $mainVariationId;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $customsTariffNumber;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $revenueAccount;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $couponRestriction;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $condition;
 
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $conditionApi;
 
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $updatedAt;
 
     /**
      * @var bool
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isSubscribable;
 
     /**
      * @var bool
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isSerialNumber;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $amazonFbaPlatform;
 
     /**
      * @var bool
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isShippableByAmazon;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $amazonProductType;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $amazonFedas;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ebayPresetId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ebayCategory;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ebayCategory2;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ebayStoreCategory;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ebayStoreCategory2;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $rakutenCategoryId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $flagOne;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $flagTwo;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ageRestriction;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $feedback;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free1;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free2;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free3;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free4;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free5;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free6;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free7;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free8;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free9;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free10;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free11;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free12;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free13;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free14;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free15;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free16;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free17;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free18;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free19;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $free20;
 
     /**
      * @var ItemText[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemText>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\ItemText>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $texts;
 
     /**
      * @var ItemCrossSelling[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemCrossSelling>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\ItemCrossSelling>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemCrossSelling;
 
     /**
      * @var ItemVariation[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemVariation>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\ItemVariation>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $variations;
 
     /**
      * @var ItemImage[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemImage>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\ItemImage>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemImages;
 
     /**

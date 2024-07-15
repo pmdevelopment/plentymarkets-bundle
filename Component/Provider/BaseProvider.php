@@ -41,14 +41,8 @@ class BaseProvider
 
     public const HEADER_INTERNAL_API_ID = 'X-Internal-Api-Id';
 
-    private Client $client;
-
-    private RestfulService $service;
-
-    public function __construct(Client $client, RestfulService $service)
+    public function __construct(private Client $client, private readonly RestfulService $service)
     {
-        $this->client = $client;
-        $this->service = $service;
     }
 
     public function getClient(): Client

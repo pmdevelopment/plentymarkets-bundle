@@ -15,18 +15,16 @@ use PM\PlentyMarketsBundle\Component\Model\Warehouses\Location;
  * Class LocationsResponse
  *
  * @package PM\PlentyMarketsBundle\Component\Response
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class LocationsResponse extends PaginationResponse
 {
     /**
      * @var Location[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Warehouses\Location>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Warehouses\Location>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

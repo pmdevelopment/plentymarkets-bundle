@@ -17,113 +17,100 @@ use PM\PlentyMarketsBundle\Component\Model\Base\BaseAmount;
  * Class OrderItemAmount
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class OrderItemAmount extends BaseAmount
 {
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $orderItemId;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $purchasePrice;
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $priceOriginalGross;
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $priceOriginalNet;
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $priceGross;
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $priceNet;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $surcharge;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $discount;
 
     /**
      * @var bool
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isPercentage;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $updatedAt;
 
     /**

@@ -5,53 +5,39 @@ namespace PM\PlentyMarketsBundle\Component\Model\Order;
 use DateTimeInterface;
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * @JMS\ExclusionPolicy("ALL")
- */
+#[JMS\ExclusionPolicy('ALL')]
 class OrderItemReference
 {
     public const TYPE_BUNDLE = 'bundle';
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
-    private int $id;
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private readonly int $id;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private int $orderItemId;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private int $referenceOrderItemId;
 
-    /**
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private string $referenceType;
 
-    /**
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private DateTimeInterface $createdAt;
 
-    /**
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private DateTimeInterface $updatedAt;
 
 

@@ -16,45 +16,40 @@ use JMS\Serializer\Annotation as JMS;
  * Class SalesPriceCountry
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class SalesPriceCountry
 {
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $salesPriceId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $countryId;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $updatedAt;
 
     /**

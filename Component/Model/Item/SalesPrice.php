@@ -15,135 +15,120 @@ use JMS\Serializer\Annotation as JMS;
  * Class SalesPrice
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Item
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class SalesPrice
 {
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $position;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $minimumOrderQuantity;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $type;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isCustomerPrice;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isDisplayedByDefault;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isLiveConversion;
 
     /**
      * @var SalesPriceName[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceName>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceName>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $names;
 
     /**
      * @var SalesPriceAccount[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceAccount>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceAccount>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $accounts;
 
     /**
      * @var SalesPriceCountry[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCountry>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCountry>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $countries;
 
     /**
      * @var SalesPriceCurrency[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCurrency>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCurrency>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $currencies;
 
     /**
      * @var SalesPriceCustomerClass[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCustomerClass>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceCustomerClass>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $customerClasses;
 
     /**
      * @var SalesPriceReferrer[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceReferrer>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceReferrer>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $referrers;
 
     /**
      * @var SalesPriceOnlineStore[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceOnlineStore>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\SalesPriceOnlineStore>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $clients;
 
     /**

@@ -15,9 +15,8 @@ use PM\PlentyMarketsBundle\Component\Traits\HasConstantsTrait;
  * Class OrderDateType
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Order
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class OrderDateType
 {
     use HasConstantsTrait;
@@ -37,38 +36,34 @@ class OrderDateType
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isErasable;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $position;
 
     /**
      * @var array|OrderDateTypeName[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderDateTypeName>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderDateTypeName>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $names;
 
     /**

@@ -8,10 +8,10 @@ use JMS\Serializer\Annotation as JMS;
 class Picklist
 {
     #[JMS\Type("integer")]
-    private int $id;
+    private readonly int $id;
 
     #[JMS\Type("DateTime")]
-    private DateTimeInterface $createdAt;
+    private readonly DateTimeInterface $createdAt;
 
     #[JMS\Type("DateTime")]
     private ?DateTimeInterface $processDate = null;
@@ -20,7 +20,7 @@ class Picklist
     private ?DateTimeInterface $doneDate = null;
 
     #[JMS\Type("integer")]
-    private int $ownerId;
+    private readonly int $ownerId;
 
     #[JMS\Type("integer")]
     private ?int $processUserId = null;
@@ -29,7 +29,7 @@ class Picklist
     private string $processState = '';
 
     #[JMS\Type(PicklistFilterOptions::class)]
-    private PicklistFilterOptions $filterOptions;
+    private readonly PicklistFilterOptions $filterOptions;
 
     public function getId(): int
     {

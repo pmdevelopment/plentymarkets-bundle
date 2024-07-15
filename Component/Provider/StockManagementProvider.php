@@ -44,7 +44,6 @@ class StockManagementProvider extends BaseProvider
     /**
      * Get By Id
      *
-     * @param int $warehouseId
      *
      * @return mixed|Exception|Warehouse
      * @throws Throwable
@@ -60,10 +59,6 @@ class StockManagementProvider extends BaseProvider
     }
 
     /**
-     * @param int                    $warehouseId
-     * @param DateTimeInterface|null $dateFrom
-     * @param int                    $page
-     * @param array                  $query
      *
      * @return Exception|mixed|StockMovement[]
      * @throws Throwable

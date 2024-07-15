@@ -16,8 +16,6 @@ class AccessTokenRepository extends ServiceEntityRepository
 {
     /**
      * AccessTokenRepository constructor.
-     *
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {

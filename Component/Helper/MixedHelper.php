@@ -16,10 +16,7 @@ class MixedHelper
     /**
      * Get Constant Values By Prefix
      *
-     * @param string $className
-     * @param string $prefix
      *
-     * @return array
      */
     public static function getConstantValuesByPrefix(string $className, string $prefix): array
     {
@@ -28,7 +25,7 @@ class MixedHelper
 
         try {
             $reflection = new ReflectionClass($className);
-        } catch (ReflectionException $e) {
+        } catch (ReflectionException) {
             return [];
         }
 

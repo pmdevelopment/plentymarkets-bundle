@@ -28,16 +28,12 @@ class ApiLockActiveException extends Exception implements Throwable, ApiExceptio
      *
      * @param string    $message
      * @param int       $code
-     * @param Exception $previous
      */
     public function __construct($message = 'The api is locked', $code = Response::HTTP_LOCKED, Exception $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
 
-    /**
-     * @return int
-     */
     public function getInternalCode(): int
     {
         return ErrorHelper::CODE_LIMIT_LOCK;

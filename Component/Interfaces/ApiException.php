@@ -13,8 +13,6 @@ interface ApiException
 
     /**
      * Get Code
-     *
-     * @return int
      */
     public function getInternalCode(): int;
 

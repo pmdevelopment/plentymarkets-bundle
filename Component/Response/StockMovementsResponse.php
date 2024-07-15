@@ -15,18 +15,16 @@ use PM\PlentyMarketsBundle\Component\Model\StockManagement\StockMovement;
  * Class StockMovementsResponse
  *
  * @package PM\PlentyMarketsBundle\Component\Response
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class StockMovementsResponse extends PaginationResponse
 {
     /**
      * @var StockMovement[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\StockManagement\StockMovement>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\StockManagement\StockMovement>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

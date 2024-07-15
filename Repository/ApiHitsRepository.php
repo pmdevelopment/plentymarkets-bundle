@@ -3,6 +3,8 @@
 namespace PM\PlentyMarketsBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\Persistence\ManagerRegistry;
 use PM\PlentyMarketsBundle\Component\Model\ApiHitsStatisticModel;
 use PM\PlentyMarketsBundle\Entity\ApiHits;
@@ -17,8 +19,6 @@ class ApiHitsRepository extends ServiceEntityRepository
 {
     /**
      * ApiHitsRepository constructor.
-     *
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,7 +37,7 @@ class ApiHitsRepository extends ServiceEntityRepository
         return $this->findOneBy(
             [
                 'apiId' => $apiId,
-                'day'   => new \DateTime(),
+                'day' => new \DateTime(),
             ]
         );
     }
@@ -63,10 +63,12 @@ class ApiHitsRepository extends ServiceEntityRepository
             ->orderBy('api_hits.day', 'asc')
             ->groupBy('api_hits.day')
             ->setParameters(
-                [
-                    'api_id' => $apiId,
-                    'start'  => $fourteenDaysAgo,
-                ]
+                new ArrayCollection(
+                    [
+                        new Parameter('api_id', $apiId),
+                        new Parameter('start', $fourteenDaysAgo),
+                    ]
+                )
             );
 
         foreach ($codes as $code) {

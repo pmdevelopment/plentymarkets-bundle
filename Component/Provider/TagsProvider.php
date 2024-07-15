@@ -19,12 +19,7 @@ class TagsProvider extends BaseProvider
     /**
      * PUT: Relationship
      *
-     * @param int    $tagId
-     * @param string $tagType
-     * @param string $relationshipValue
-     * @param string $relationshipUUID5
      *
-     * @return Throwable|null
      */
     public function postRelationship(int $tagId, string $tagType, string $relationshipValue, string $relationshipUUID5 = ''): ?Throwable
     {

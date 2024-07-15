@@ -6,47 +6,42 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * AccessToken
- *
- * @ORM\Table(name="pm_plenty_markets_access_token", indexes={@ORM\Index(name="access_token_idx_api",columns={"api"})})
- * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\AccessTokenRepository")
  */
+#[ORM\Table(name: 'pm_plenty_markets_access_token')]
+#[ORM\Index(name: 'access_token_idx_api', columns: ['api'])]
+#[ORM\Entity(repositoryClass: \PM\PlentyMarketsBundle\Repository\AccessTokenRepository::class)]
 class AccessToken
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="api", type="string", length=20)
      */
+    #[ORM\Column(name: 'api', type: 'string', length: 20)]
     private $api;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="token", type="text")
      */
+    #[ORM\Column(name: 'token', type: 'text')]
     private $token;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime")
      */
+    #[ORM\Column(name: 'created', type: 'datetime')]
     private $created;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="valid_until", type="datetime")
      */
+    #[ORM\Column(name: 'valid_until', type: 'datetime')]
     private $validUntil;
 
 

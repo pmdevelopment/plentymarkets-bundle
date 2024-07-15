@@ -24,164 +24,146 @@ class Order
 
     /**
      * @var OrderItem[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItem>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderItem>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $orderItems;
 
     /**
      * @var OrderProperty[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderProperty>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderProperty>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $properties;
 
     /**
      * @var Address[]|array
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Account\Address>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Account\Address>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $addresses = [];
 
     /**
      * @var OrderAddressRelation[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderAddressRelation>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderAddressRelation>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $addressRelations;
 
     /**
      * @var OrderRelation[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderRelation>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderRelation>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $relations;
 
     /**
      * @var OrderAmount[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderAmount>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderAmount>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $amounts;
 
     /**
      * @var OrderDate[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderDate>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderDate>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $dates;
 
     /**
      * @var OrderReference[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\OrderReference>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderReference>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $orderReferences;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $typeId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("int")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('int')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $plentyId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $locationId;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $statusId;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $statusName;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $ownerId;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $updatedAt;
 
     /**
      * @var int
-     *
-     * @JMS\Type("int")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('int')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var int
-     *
-     * @JMS\Type("int")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('int')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $referrerId;
 
 
@@ -485,17 +467,12 @@ class Order
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getReferrerId(): ?int
     {
         return $this->referrerId;
     }
 
     /**
-     * @param int|null $referrerId
-     *
      * @return Order
      */
     public function setReferrerId(?int $referrerId): Order
@@ -548,9 +525,7 @@ class Order
     /**
      * Get Address By Id
      *
-     * @param int $id
      *
-     * @return Address|null
      */
     public function getAddressById(int $id): ?Address
     {
@@ -574,8 +549,6 @@ class Order
     }
 
     /**
-     * @param int $type
-     *
      * @return OrderAddressRelation|null
      */
     public function getAddressRelationByType(int $type): ?OrderAddressRelation

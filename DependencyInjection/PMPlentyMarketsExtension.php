@@ -32,9 +32,7 @@ class PMPlentyMarketsExtension extends Extension
     }
 
     /**
-     * @param array  $config
      * @param string $prefix
-     *
      * @return array
      */
     private function getParameters(array $config, $prefix)

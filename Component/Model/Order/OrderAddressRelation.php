@@ -9,23 +9,17 @@ class OrderAddressRelation
     public const TYPE_ID_BILLING = 1;
     public const TYPE_ID_DELIVERY = 2;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Since('1.0')]
     private $orderId;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Since('1.0')]
     private $typeId;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $addressId;
 
     /**

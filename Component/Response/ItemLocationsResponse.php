@@ -21,11 +21,10 @@ class ItemLocationsResponse extends PaginationResponse
 {
     /**
      * @var ItemVariationStockStorageLocation[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationStockStorageLocation>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationStockStorageLocation>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

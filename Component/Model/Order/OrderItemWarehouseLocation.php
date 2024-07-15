@@ -8,25 +8,25 @@ class OrderItemWarehouseLocation
 {
 
     #[JMS\Type("integer")]
-    private int $orderItemId;
+    private readonly int $orderItemId;
 
     #[JMS\Type("integer")]
-    private int $quantity;
+    private readonly int $quantity;
 
     #[JMS\Type("integer")]
-    private int $warehouseLocationId;
+    private readonly int $warehouseLocationId;
 
     #[JMS\Type("integer")]
-    private int $batchBestBeforeDateId;
+    private readonly int $batchBestBeforeDateId;
 
     #[JMS\Type("integer")]
-    private int $originalQuantity;
+    private readonly int $originalQuantity;
 
     #[JMS\Type("string")]
-    private string $batch;
+    private readonly string $batch;
 
     #[JMS\Type("string")]
-    private string $bestBeforeDate;
+    private readonly string $bestBeforeDate;
 
     public function getOrderItemId(): int
     {

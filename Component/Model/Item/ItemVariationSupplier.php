@@ -7,132 +7,113 @@ use JMS\Serializer\Annotation as JMS;
 
 class ItemVariationSupplier
 {
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private int $id;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $variationId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $supplierId;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $purchasePrice;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $minimumPurchase;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemNumber;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $lastPriceQuery;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $deliveryTimeInDays;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $discount;
 
     /**
      * @var boolean
-     *
-     * @JMS\Type("boolean")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('boolean')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $isDiscountable;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $packagingUnit;
 
     /**
      * @var \DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $lastUpdateTimestamp;
 
     /**
      * @var \DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
-     *
      * @return ItemVariationSupplier
      */
     public function setId(int $id): ItemVariationSupplier
@@ -142,17 +123,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getVariationId(): int
     {
         return $this->variationId;
     }
 
     /**
-     * @param int $variationId
-     *
      * @return ItemVariationSupplier
      */
     public function setVariationId(int $variationId): ItemVariationSupplier
@@ -162,17 +138,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getSupplierId(): int
     {
         return $this->supplierId;
     }
 
     /**
-     * @param int $supplierId
-     *
      * @return ItemVariationSupplier
      */
     public function setSupplierId(int $supplierId): ItemVariationSupplier
@@ -182,17 +153,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getPurchasePrice(): float
     {
         return $this->purchasePrice;
     }
 
     /**
-     * @param float $purchasePrice
-     *
      * @return ItemVariationSupplier
      */
     public function setPurchasePrice(float $purchasePrice): ItemVariationSupplier
@@ -202,17 +168,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getMinimumPurchase(): int
     {
         return $this->minimumPurchase;
     }
 
     /**
-     * @param int $minimumPurchase
-     *
      * @return ItemVariationSupplier
      */
     public function setMinimumPurchase(int $minimumPurchase): ItemVariationSupplier
@@ -222,17 +183,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getItemNumber(): string
     {
         return $this->itemNumber;
     }
 
     /**
-     * @param string $itemNumber
-     *
      * @return ItemVariationSupplier
      */
     public function setItemNumber(string $itemNumber): ItemVariationSupplier
@@ -242,17 +198,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLastPriceQuery(): string
     {
         return $this->lastPriceQuery;
     }
 
     /**
-     * @param string $lastPriceQuery
-     *
      * @return ItemVariationSupplier
      */
     public function setLastPriceQuery(string $lastPriceQuery): ItemVariationSupplier
@@ -262,17 +213,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getDeliveryTimeInDays(): int
     {
         return $this->deliveryTimeInDays;
     }
 
     /**
-     * @param int $deliveryTimeInDays
-     *
      * @return ItemVariationSupplier
      */
     public function setDeliveryTimeInDays(int $deliveryTimeInDays): ItemVariationSupplier
@@ -282,17 +228,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getDiscount(): float
     {
         return $this->discount;
     }
 
     /**
-     * @param float $discount
-     *
      * @return ItemVariationSupplier
      */
     public function setDiscount(float $discount): ItemVariationSupplier
@@ -302,17 +243,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isDiscountable(): bool
     {
         return $this->isDiscountable;
     }
 
     /**
-     * @param bool $isDiscountable
-     *
      * @return ItemVariationSupplier
      */
     public function setIsDiscountable(bool $isDiscountable): ItemVariationSupplier
@@ -322,17 +258,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getPackagingUnit(): int
     {
         return $this->packagingUnit;
     }
 
     /**
-     * @param int $packagingUnit
-     *
      * @return ItemVariationSupplier
      */
     public function setPackagingUnit(int $packagingUnit): ItemVariationSupplier
@@ -342,17 +273,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getLastUpdateTimestamp(): \DateTime
     {
         return $this->lastUpdateTimestamp;
     }
 
     /**
-     * @param \DateTime $lastUpdateTimestamp
-     *
      * @return ItemVariationSupplier
      */
     public function setLastUpdateTimestamp(\DateTime $lastUpdateTimestamp): ItemVariationSupplier
@@ -362,17 +288,12 @@ class ItemVariationSupplier
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
-     *
      * @return ItemVariationSupplier
      */
     public function setCreatedAt(\DateTime $createdAt): ItemVariationSupplier

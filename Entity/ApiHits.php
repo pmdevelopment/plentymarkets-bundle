@@ -7,10 +7,10 @@ use PM\PlentyMarketsBundle\Component\Helper\MixedHelper;
 
 /**
  * ApiHits
- *
- * @ORM\Table(name="pm_plenty_markets_api_hits", indexes={@ORM\Index(name="api_hits_api_idx", columns={"day","api_id"})})
- * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\ApiHitsRepository")
  */
+#[ORM\Table(name: 'pm_plenty_markets_api_hits')]
+#[ORM\Index(name: 'api_hits_api_idx', columns: ['day', 'api_id'])]
+#[ORM\Entity(repositoryClass: \PM\PlentyMarketsBundle\Repository\ApiHitsRepository::class)]
 class ApiHits
 {
     const RESPONSE_CODE_200 = '200';
@@ -20,60 +20,52 @@ class ApiHits
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="day", type="date")
      */
+    #[ORM\Column(name: 'day', type: 'date')]
     private $day;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="api_id", type="string", length=10)
      */
+    #[ORM\Column(name: 'api_id', type: 'string', length: 10)]
     private $apiId;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="count", type="integer")
      */
+    #[ORM\Column(name: 'count', type: 'integer')]
     private $count;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="response_code200", type="integer")
      */
+    #[ORM\Column(name: 'response_code200', type: 'integer')]
     private $responseCode200;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="response_code401", type="integer")
      */
+    #[ORM\Column(name: 'response_code401', type: 'integer')]
     private $responseCode401;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="response_code429", type="integer")
      */
+    #[ORM\Column(name: 'response_code429', type: 'integer')]
     private $responseCode429;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="response_code_other", type="integer")
      */
+    #[ORM\Column(name: 'response_code_other', type: 'integer')]
     private $responseCodeOther;
 
     /**

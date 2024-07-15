@@ -21,11 +21,10 @@ class ItemsBarcodesResponse extends PaginationResponse
 {
     /**
      * @var Barcode[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Item\Barcode>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Item\Barcode>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

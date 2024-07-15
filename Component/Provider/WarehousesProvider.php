@@ -56,7 +56,6 @@ class WarehousesProvider extends BaseProvider
     /**
      * Get Location
      *
-     * @param int $warehouseLocationId
      *
      * @return Throwable|Location|object
      * @throws Throwable

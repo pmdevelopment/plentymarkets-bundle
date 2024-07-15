@@ -8,104 +8,92 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LimitHistory
  *
- * @ORM\Table(name="pm_plenty_markets_limit_history", indexes={@ORM\Index(name="limit_history_idx_api",columns={"api", "path"})})
- * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\LimitHistoryRepository")
  *
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Table(name: 'pm_plenty_markets_limit_history')]
+#[ORM\Index(name: 'limit_history_idx_api', columns: ['api', 'path'])]
+#[ORM\Entity(repositoryClass: \PM\PlentyMarketsBundle\Repository\LimitHistoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class LimitHistory
 {
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="api", type="string", length=20)
      */
+    #[ORM\Column(name: 'api', type: 'string', length: 20)]
     private $api;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=50)
      */
+    #[ORM\Column(name: 'path', type: 'string', length: 50)]
     private $path;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="day", type="date")
      */
+    #[ORM\Column(name: 'day', type: 'date')]
     private $day;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="long_period_total", type="integer")
      */
+    #[ORM\Column(name: 'long_period_total', type: 'integer')]
     private $longPeriodTotal;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="long_period_minimum", type="integer")
      */
+    #[ORM\Column(name: 'long_period_minimum', type: 'integer')]
     private $longPeriodMinimum;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="long_period_exception", type="integer")
      */
+    #[ORM\Column(name: 'long_period_exception', type: 'integer')]
     private $longPeriodException;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="long_period_latest", type="integer")
      */
+    #[ORM\Column(name: 'long_period_latest', type: 'integer')]
     private $longPeriodLatest;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="short_period_total", type="integer")
      */
+    #[ORM\Column(name: 'short_period_total', type: 'integer')]
     private $shortPeriodTotal;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="short_period_minimum", type="integer")
      */
+    #[ORM\Column(name: 'short_period_minimum', type: 'integer')]
     private $shortPeriodMinimum;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="short_period_exception", type="integer")
      */
+    #[ORM\Column(name: 'short_period_exception', type: 'integer')]
     private $shortPeriodException;
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="short_period_latest", type="integer")
      */
+    #[ORM\Column(name: 'short_period_latest', type: 'integer')]
     private $shortPeriodLatest;
 
     /**
      * @var DateTime
-     *
-     * @ORM\Column(name="updated", type="datetime")
      */
+    #[ORM\Column(name: 'updated', type: 'datetime')]
     private $updated;
 
     /**
@@ -400,9 +388,7 @@ class LimitHistory
         return $this;
     }
 
-    /**
-     * @ORM\PreFlush()
-     */
+    #[ORM\PreFlush]
     public function preFlush()
     {
         $this->setUpdated(new DateTime());

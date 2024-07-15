@@ -18,10 +18,7 @@ class Comments
     /**
      * Post for order
      *
-     * @param int    $orderId
-     * @param string $text
      *
-     * @return Payload
      */
     public static function postForOrder(int $orderId, string $text): Payload
     {

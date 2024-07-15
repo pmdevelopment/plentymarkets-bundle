@@ -17,8 +17,6 @@ class LimitHistoryRepository extends ServiceEntityRepository
 {
     /**
      * LimitHistoryRepository constructor.
-     *
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {

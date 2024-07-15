@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ApiLock
- *
- * @ORM\Table(name="pm_plenty_markets_api_lock", indexes={@ORM\Index(name="api_lock_idx_api",columns={"api"})})
- * @ORM\Entity(repositoryClass="PM\PlentyMarketsBundle\Repository\ApiLockRepository")
  */
+#[ORM\Table(name: 'pm_plenty_markets_api_lock')]
+#[ORM\Index(name: 'api_lock_idx_api', columns: ['api'])]
+#[ORM\Entity(repositoryClass: \PM\PlentyMarketsBundle\Repository\ApiLockRepository::class)]
 class ApiLock
 {
     public const TYPE_LIMIT_LOCK_PERCENTAGE = 'limit_lock';
@@ -17,62 +17,53 @@ class ApiLock
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
+    #[ORM\Column(name: 'id', type: 'integer')]
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
     private $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="api", type="string", length=20)
      */
+    #[ORM\Column(name: 'api', type: 'string', length: 20)]
     private $api;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=20)
      */
+    #[ORM\Column(name: 'type', type: 'string', length: 20)]
     private $type;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=255)
      */
-    private $description;
+    #[ORM\Column(name: 'description', type: 'string', length: 255)]
+    private $description = '';
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="valid_from", type="datetime")
      */
+    #[ORM\Column(name: 'valid_from', type: 'datetime')]
     private $validFrom;
 
     /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="valid_until", type="datetime", nullable=true)
      */
+    #[ORM\Column(name: 'valid_until', type: 'datetime', nullable: true)]
     private $validUntil;
 
     /**
      * @var bool
-     *
-     * @ORM\Column(name="deleted", type="boolean")
      */
-    private $deleted;
+    #[ORM\Column(name: 'deleted', type: 'boolean')]
+    private $deleted = false;
 
     /**
      * ApiLock constructor.
      */
     public function __construct()
     {
-        $this->description = '';
-        $this->deleted = false;
     }
 
 
@@ -158,9 +149,6 @@ class ApiLock
         return $this->validUntil;
     }
 
-    /**
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;

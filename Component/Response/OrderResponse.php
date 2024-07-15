@@ -15,11 +15,10 @@ class OrderResponse extends PaginationResponse
 {
     /**
      * @var Order[]|array
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Order\Order>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\Order>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

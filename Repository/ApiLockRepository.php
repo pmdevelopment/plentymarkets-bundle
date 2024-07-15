@@ -3,6 +3,8 @@
 namespace PM\PlentyMarketsBundle\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\Persistence\ManagerRegistry;
 use PM\PlentyMarketsBundle\Entity\ApiLock;
 
@@ -17,8 +19,6 @@ class ApiLockRepository extends ServiceEntityRepository
 
     /**
      * ApiLockRepository constructor.
-     *
-     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -45,9 +45,11 @@ class ApiLockRepository extends ServiceEntityRepository
                 )
             )
             ->setParameters(
-                [
-                    'now' => date('Y-m-d H:i:s'),
-                ]
+                new ArrayCollection(
+                    [
+                        new Parameter('now', date('Y-m-d H:i:s')),
+                    ]
+                )
             )
             ->orderBy(sprintf('%s.validUntil', $alias), 'desc');
 

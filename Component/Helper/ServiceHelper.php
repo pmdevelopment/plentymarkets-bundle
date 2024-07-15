@@ -25,10 +25,8 @@ class ServiceHelper
      * @param string $uri
      * @param string $username
      * @param string $password
-     *
-     * @return string
      */
-    public static function createApiId($uri, $username, $password)
+    public static function createApiId($uri, $username, $password): string
     {
         return substr(hash('sha256', sprintf('%s_%s_%s', $uri, $username, $password)), 1, 5);
     }
@@ -36,7 +34,6 @@ class ServiceHelper
     /**
      * Get API Id
      *
-     * @param Config $config
      *
      * @return string
      */

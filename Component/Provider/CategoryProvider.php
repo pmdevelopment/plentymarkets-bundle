@@ -67,7 +67,6 @@ class CategoryProvider extends BaseProvider
     /**
      * Items Updated Since
      *
-     * @param DateTimeInterface|null $since
      *
      * @return array|Category[]|Throwable
      * @throws Throwable

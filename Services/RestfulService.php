@@ -39,37 +39,10 @@ use Throwable;
 
 class RestfulService
 {
-    private AccessTokenRepository $accessTokenRepository;
-    private ApiHitsRepository $apiHitsRepository;
-    private ApiLockRepository $apiLockRepository;
-
-    private SerializerInterface $serializer;
-    private EntityManagerInterface $entityManager;
-    private LimitHistoryRepository $limitHistoryRepository;
-    private LoggerInterface $logger;
-
-    private bool $parameterGuzzleVerifySsl;
-
     private Config $config;
 
-    public function __construct(
-        AccessTokenRepository $accessTokenRepository,
-        ApiHitsRepository $apiHitsRepository,
-        ApiLockRepository $apiLockRepository,
-        SerializerInterface $serializer,
-        EntityManagerInterface $entityManager,
-        LimitHistoryRepository $limitHistoryRepository,
-        LoggerInterface $logger,
-        bool $parameterGuzzleVerifySsl
-    ) {
-        $this->accessTokenRepository = $accessTokenRepository;
-        $this->apiHitsRepository = $apiHitsRepository;
-        $this->apiLockRepository = $apiLockRepository;
-        $this->serializer = $serializer;
-        $this->entityManager = $entityManager;
-        $this->limitHistoryRepository = $limitHistoryRepository;
-        $this->logger = $logger;
-        $this->parameterGuzzleVerifySsl = $parameterGuzzleVerifySsl;
+    public function __construct(private readonly AccessTokenRepository $accessTokenRepository, private readonly ApiHitsRepository $apiHitsRepository, private readonly ApiLockRepository $apiLockRepository, private readonly SerializerInterface $serializer, private readonly EntityManagerInterface $entityManager, private readonly LimitHistoryRepository $limitHistoryRepository, private readonly LoggerInterface $logger, private readonly bool $parameterGuzzleVerifySsl)
+    {
     }
 
     public function getEntityManager(): EntityManagerInterface
@@ -305,11 +278,11 @@ class RestfulService
 
     public static function getBaseUri(string $uri): string
     {
-        if ('/' !== substr($uri, -1)) {
+        if (!str_ends_with($uri, '/')) {
             $uri = sprintf('%s/', $uri);
         }
 
-        if ('rest/' === substr($uri, -5)) {
+        if (str_ends_with($uri, 'rest/')) {
             return $uri;
         }
 

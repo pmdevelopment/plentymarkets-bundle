@@ -15,9 +15,8 @@ use JMS\Serializer\Annotation as JMS;
  * Class StockMovement
  *
  * @package PM\PlentyMarketsBundle\Component\Model\StockManagement
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class StockMovement
 {
     const PROCESS_ROW_TYPE_INCOMING = 1;
@@ -25,156 +24,139 @@ class StockMovement
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $processRowId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $itemId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $warehouseId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $reason;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $userId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $processRowType;
 
     /**
      * @var float
-     *
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $purchasePrice;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $variationId;
 
     /**
      * @var integer
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $quantity;
 
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $reasonString;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $attributeValues;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $warehouseName;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $storageLocationName;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $batch;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Since("1.0")
-     * @JMS\Expose()
      */
+    #[JMS\Type('string')]
+    #[JMS\Since('1.0')]
+    #[JMS\Expose]
     private $bestBeforeDate;
 
     /**
      * @var DateTime
-     *
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
     /**

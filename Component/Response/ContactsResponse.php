@@ -16,18 +16,16 @@ use PM\PlentyMarketsBundle\Component\Model\Item\Item;
  * Class ItemsResponse
  *
  * @package PM\PlentyMarketsBundle\Component\Response
- *
- * @JMS\ExclusionPolicy("ALL")
  */
+#[JMS\ExclusionPolicy('ALL')]
 class ContactsResponse extends PaginationResponse
 {
     /**
      * @var Contact[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Account\Contact>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Account\Contact>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

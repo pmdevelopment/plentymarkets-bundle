@@ -10,71 +10,61 @@ use LogicException;
  * Class Category
  *
  * @package PM\PlentyMarketsBundle\Component\Model\Category
- * @JMS\ExclusionPolicy("ALL")
  *
  * @TODO    Include all properties
  */
+#[JMS\ExclusionPolicy('ALL')]
 class Category
 {
     public const TYPE_ITEM = 'item';
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $parentCategoryId;
 
     /**
      * @var int
-     *
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $level;
 
     /**
      * @var string
-     *
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $type;
 
 
     /**
      * @var array|CategoryDetail[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Category\CategoryDetail>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Category\CategoryDetail>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $details;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
-     *
      * @return Category
      */
     public function setId(int $id): Category
@@ -84,17 +74,12 @@ class Category
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getParentCategoryId(): ?int
     {
         return $this->parentCategoryId;
     }
 
     /**
-     * @param int|null $parentCategoryId
-     *
      * @return Category
      */
     public function setParentCategoryId(?int $parentCategoryId): Category
@@ -104,17 +89,12 @@ class Category
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getLevel(): int
     {
         return $this->level;
     }
 
     /**
-     * @param int $level
-     *
      * @return Category
      */
     public function setLevel(int $level): Category
@@ -124,17 +104,12 @@ class Category
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param string $type
-     *
      * @return Category
      */
     public function setType(string $type): Category
@@ -168,7 +143,6 @@ class Category
     /**
      * Get Detail
      *
-     * @param string $language
      *
      * @return CategoryDetail
      */

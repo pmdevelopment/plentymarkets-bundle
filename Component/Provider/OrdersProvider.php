@@ -66,7 +66,6 @@ class OrdersProvider extends BaseProvider
     /**
      * Get Order By Id; Include Addresses
      *
-     * @param int $orderId
      *
      * @return array|Throwable|object|Order
      * @throws Throwable
@@ -251,9 +250,6 @@ class OrdersProvider extends BaseProvider
     /**
      * Put Warehouse ID for Order Item
      *
-     * @param int $orderId
-     * @param int $orderItemId
-     * @param int $warehouseApiId
      *
      * @return bool|Exception|mixed
      */

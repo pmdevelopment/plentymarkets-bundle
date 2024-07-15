@@ -23,8 +23,6 @@ class ApiLockHelper
 {
     /**
      * Append Type Choice
-     *
-     * @param FormBuilderInterface $builder
      */
     public static function appendTypeChoiceToForm(FormBuilderInterface $builder)
     {
@@ -39,10 +37,8 @@ class ApiLockHelper
 
     /**
      * Get Types
-     *
-     * @return array
      */
-    public static function getTypeChoice()
+    public static function getTypeChoice(): array
     {
         $choices = MixedHelper::getConstantValuesByPrefix(ApiLock::class, 'TYPE_');
 

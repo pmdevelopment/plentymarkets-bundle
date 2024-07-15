@@ -20,54 +20,14 @@ use PM\PlentyMarketsBundle\Services\RestfulService;
 class Config
 {
     /**
-     * @var bool
-     */
-    private $priority = false;
-
-    /**
-     * @var string
-     */
-    private $uri;
-
-    /**
-     * @var string
-     */
-    private $username;
-
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var float
-     */
-    private $limitLock;
-
-    /**
-     * @var float
-     */
-    private $shortLimitLock;
-
-    /**
      * Config constructor.
      *
      * @param string $uri
      * @param string $username
      * @param string $password
-     * @param float  $limitLock
-     * @param float  $shortLimitLock
-     * @param bool   $priority
      */
-    public function __construct($uri, $username, $password, float $limitLock, float $shortLimitLock, bool $priority = false)
+    public function __construct(private $uri, private $username, private $password, private readonly float $limitLock, private readonly float $shortLimitLock, private bool $priority = false)
     {
-        $this->uri = $uri;
-        $this->username = $username;
-        $this->password = $password;
-        $this->limitLock = $limitLock;
-        $this->shortLimitLock = $shortLimitLock;
-
-        $this->priority = $priority;
     }
 
     /**
@@ -102,25 +62,17 @@ class Config
         return $this->limitLock;
     }
 
-    /**
-     * @return float
-     */
     public function getShortLimitLock(): float
     {
         return $this->shortLimitLock;
     }
 
-    /**
-     * @return bool
-     */
     public function isPriority(): bool
     {
         return $this->priority;
     }
 
     /**
-     * @param bool $priority
-     *
      * @return Config
      */
     public function setPriority(bool $priority): Config

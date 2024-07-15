@@ -11,51 +11,37 @@ namespace PM\PlentyMarketsBundle\Component\Model\Order;
 use DateTimeInterface;
 use JMS\Serializer\Annotation as JMS;
 
-/**
- * @JMS\ExclusionPolicy("ALL")
- */
+#[JMS\ExclusionPolicy('ALL')]
 class StatusHistoryEntry
 {
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $id;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $orderId;
 
-    /**
-     * @JMS\Type("float")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('float')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $statusId;
 
-    /**
-     * @JMS\Type("DateTime")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('DateTime')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $createdAt;
 
-    /**
-     * @JMS\Type("integer")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('integer')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private ?int $userId = null;
 
-    /**
-     * @JMS\Type("string")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
-     */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private ?string $procedureText = null;
 
     public function getId(): int

@@ -15,11 +15,10 @@ class CategoriesResponse extends PaginationResponse
 {
     /**
      * @var Category[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Category\Category>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Category\Category>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

@@ -26,22 +26,17 @@ class Payload
      */
     private $body = [];
 
-    /**
-     * @return string
-     */
     public function getResource(): string
     {
         return $this->resource;
     }
 
     /**
-     * @param string $resource
-     *
      * @return Payload
      */
     public function setResource(string $resource): Payload
     {
-        if ('rest/' !== substr($resource, 0, 5)) {
+        if (!str_starts_with($resource, 'rest/')) {
             $resource = sprintf('rest/%s', $resource);
         }
 
@@ -50,17 +45,12 @@ class Payload
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMethod(): string
     {
         return $this->method;
     }
 
     /**
-     * @param string $method
-     *
      * @return Payload
      */
     public function setMethod(string $method): Payload
@@ -70,17 +60,12 @@ class Payload
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getBody(): array
     {
         return $this->body;
     }
 
     /**
-     * @param array $body
-     *
      * @return Payload
      */
     public function setBody(array $body): Payload

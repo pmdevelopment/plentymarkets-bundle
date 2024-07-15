@@ -16,11 +16,10 @@ class LocationStockResponse extends PaginationResponse
 
     /**
      * @var LocationStock[]
-     *
-     * @JMS\Type("array<PM\PlentyMarketsBundle\Component\Model\Warehouses\LocationStock>")
-     * @JMS\Expose()
-     * @JMS\Since("1.0")
      */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Warehouses\LocationStock>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
     private $entries;
 
     /**

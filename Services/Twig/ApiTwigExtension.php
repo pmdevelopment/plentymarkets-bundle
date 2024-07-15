@@ -22,18 +22,10 @@ use Twig\TwigFunction;
 class ApiTwigExtension extends AbstractExtension
 {
     /**
-     * @var ApiLockRepository
-     */
-    private $apiLockRepository;
-
-    /**
      * ApiTwigExtension constructor.
-     *
-     * @param ApiLockRepository $apiLockRepository
      */
-    public function __construct(ApiLockRepository $apiLockRepository)
+    public function __construct(private readonly ApiLockRepository $apiLockRepository)
     {
-        $this->apiLockRepository = $apiLockRepository;
     }
 
     /**
