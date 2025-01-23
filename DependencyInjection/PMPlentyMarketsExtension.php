@@ -7,16 +7,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * @link http://symfony.com/doc/current/cookbook/bundles/extension.html
- */
 class PMPlentyMarketsExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
@@ -31,11 +23,7 @@ class PMPlentyMarketsExtension extends Extension
         $loader->load('services.yml');
     }
 
-    /**
-     * @param string $prefix
-     * @return array
-     */
-    private function getParameters(array $config, $prefix)
+    private function getParameters(array $config, $prefix): array
     {
         $result = [];
 
