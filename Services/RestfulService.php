@@ -27,7 +27,7 @@ use PM\PlentyMarketsBundle\Entity\AccessToken;
 use PM\PlentyMarketsBundle\Entity\ApiHits;
 use PM\PlentyMarketsBundle\Entity\ApiLock;
 use PM\PlentyMarketsBundle\Entity\LimitHistory;
-use PM\PlentyMarketsBundle\Repository\AccessTokenRepository;
+use PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository;
 use PM\PlentyMarketsBundle\Repository\ApiHitsRepository;
 use PM\PlentyMarketsBundle\Repository\ApiLockRepository;
 use PM\PlentyMarketsBundle\Repository\LimitHistoryRepository;
@@ -41,9 +41,16 @@ class RestfulService
 {
     private Config $config;
 
-    public function __construct(private readonly AccessTokenRepository $accessTokenRepository, private readonly ApiHitsRepository $apiHitsRepository, private readonly ApiLockRepository $apiLockRepository, private readonly SerializerInterface $serializer, private readonly EntityManagerInterface $entityManager, private readonly LimitHistoryRepository $limitHistoryRepository, private readonly LoggerInterface $logger, private readonly bool $parameterGuzzleVerifySsl)
-    {
-    }
+    public function __construct(
+        private readonly AccessTokenRepository $accessTokenRepository,
+        private readonly ApiHitsRepository $apiHitsRepository,
+        private readonly ApiLockRepository $apiLockRepository,
+        private readonly SerializerInterface $serializer,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly LimitHistoryRepository $limitHistoryRepository,
+        private readonly LoggerInterface $logger,
+        private readonly bool $parameterGuzzleVerifySsl
+    ){}
 
     public function getEntityManager(): EntityManagerInterface
     {

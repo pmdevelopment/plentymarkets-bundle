@@ -20,4 +20,12 @@ services:
 
   PM\PlentyMarketsBundle\Services\RestfulService:
     arguments:
+      $accessTokenRepository: '@PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository'
+      $apiHitsRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiHitsRepository'
+      $apiLockRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository'
+      $limitHistoryRepository: '@PM\PlentyMarketsBundle\DocumentRepository\LimitHistoryRepository'
+      $serializer: '@serializer'
+      $entityManager: '@doctrine.orm.entity_manager'
+      $limitHistoryRepository: '@App\Repository\LimitHistoryRepository'
+      $logger: '@logger'
       $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
