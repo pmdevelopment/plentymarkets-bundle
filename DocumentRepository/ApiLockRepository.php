@@ -2,12 +2,13 @@
 
 namespace PM\PlentyMarketsBundle\DocumentRepository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Bundle\MongoDBBundle\Repository\ServiceDocumentRepository;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Doctrine\ODM\MongoDB\Query\Builder;
+use PM\PlentyMarketsBundle\Component\Interfaces\ApiLockRepositoryInterface;
 use PM\PlentyMarketsBundle\Document\ApiLock;
 
-class ApiLockRepository extends ServiceDocumentRepository
+class ApiLockRepository extends ServiceDocumentRepository implements ApiLockRepositoryInterface
 {
 
     public function __construct(ManagerRegistry $registry)

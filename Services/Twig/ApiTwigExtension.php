@@ -8,8 +8,8 @@
 
 namespace PM\PlentyMarketsBundle\Services\Twig;
 
+use PM\PlentyMarketsBundle\Component\Interfaces\ApiLockRepositoryInterface;
 use PM\PlentyMarketsBundle\Entity\ApiLock;
-use PM\PlentyMarketsBundle\Repository\ApiLockRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -24,7 +24,7 @@ class ApiTwigExtension extends AbstractExtension
     /**
      * ApiTwigExtension constructor.
      */
-    public function __construct(private readonly ApiLockRepository $apiLockRepository)
+    public function __construct(private readonly ApiLockRepositoryInterface $apiLockRepository)
     {
     }
 

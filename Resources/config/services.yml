@@ -7,25 +7,12 @@ services:
     autoconfigure: true
     public: false
 
-  PM\PlentyMarketsBundle\Repository\AccessTokenRepository: ~
-  PM\PlentyMarketsBundle\Repository\ApiHitsRepository: ~
-  PM\PlentyMarketsBundle\Repository\ApiLockRepository: ~
-  PM\PlentyMarketsBundle\Repository\LimitHistoryRepository: ~
+
+
+
 
   PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
     tags: [ { name: twig.extension } ]
 
   PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
     tags: [ { name: twig.extension } ]
-
-  PM\PlentyMarketsBundle\Services\RestfulService:
-    arguments:
-      $accessTokenRepository: '@PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository'
-      $apiHitsRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiHitsRepository'
-      $apiLockRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository'
-      $limitHistoryRepository: '@PM\PlentyMarketsBundle\DocumentRepository\LimitHistoryRepository'
-      $serializer: '@serializer'
-      $entityManager: '@doctrine.orm.entity_manager'
-      $limitHistoryRepository: '@App\Repository\LimitHistoryRepository'
-      $logger: '@logger'
-      $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
