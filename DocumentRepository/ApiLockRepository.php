@@ -23,18 +23,9 @@ class ApiLockRepository extends ServiceDocumentRepository implements ApiLockRepo
 
     public function getActive(string $api): ?ApiLock
     {
-        $qb = $qb->createQueryBuilderForActive();
-
-        $builder
-            ->field('api_lock.api')->equals($api);
+        $qb = $this->createQueryBuilderForActive($api);
 
         $result = $qb->getQuery()->getSingleResult();
-
-        $result = $builder->getQuery()->getResult();
-        if (0 < count($result)) {
-            return $result[0];
-        }
-
         return null;
     }
 
@@ -45,19 +36,21 @@ class ApiLockRepository extends ServiceDocumentRepository implements ApiLockRepo
         return $qb->getQuery()->execute()->toArray();
     }
 
-    public function createQueryBuilderForActive($alias = 'api_lock'): Builder
+    public function createQueryBuilderForActive($alias = 'api_lock', $api = null): Builder
     {
         $qb = $this->createQueryBuilder();
 
         $qb->field('deleted')->equals(false)
-            ->field('validFrom')->lte(new DateTime())
+            ->field('validFrom')->lte(new \DateTime())
             ->addOr($qb->expr()->field('validUntil')->exists(false))
-            ->addOr($qb->expr()->field('validUntil')->gt(new DateTime()));
+            ->addOr($qb->expr()->field('validUntil')->gt(new \DateTime()));
 
         if ($api !== null) {
             $qb->field('api')->equals($api);
         }
 
         $qb->sort('validUntil', 'desc');
+
+        return $qb;
     }
 }

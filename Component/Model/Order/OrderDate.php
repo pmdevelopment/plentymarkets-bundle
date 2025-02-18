@@ -10,6 +10,7 @@ namespace PM\PlentyMarketsBundle\Component\Model\Order;
 
 use DateTime;
 use JMS\Serializer\Annotation as JMS;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * Class OrderDate

@@ -28,10 +28,12 @@ use PM\PlentyMarketsBundle\Component\Provider\StockManagementProvider;
 use PM\PlentyMarketsBundle\Component\Provider\TagsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\WarehousesProvider;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
+use PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository;
 use PM\PlentyMarketsBundle\Entity\AccessToken;
 use PM\PlentyMarketsBundle\Entity\ApiHits;
 use PM\PlentyMarketsBundle\Entity\ApiLock;
 use PM\PlentyMarketsBundle\Entity\LimitHistory;
+use PM\PlentyMarketsBundle\Repository\AccessTokenRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +73,7 @@ class RestfulService
         return $this->logger;
     }
 
-    public function getApiLockRepository(): ApiLockRepository
+    public function getApiLockRepository(): ApiLockRepositoryInterface
     {
         return $this->apiLockRepository;
     }
@@ -269,7 +271,11 @@ class RestfulService
             return $e;
         }
 
-        $object = new AccessToken();
+        if (null !== $this->entityManager) {
+            $object = new AccessToken();
+        } else {
+            $object = new \PM\PlentyMarketsBundle\Document\AccessToken();
+        }
         $object
             ->setApi($api)
             ->setCreated($now)
