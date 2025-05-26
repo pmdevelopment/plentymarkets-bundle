@@ -23,7 +23,7 @@ use Throwable;
 class OrdersProvider extends BaseProvider
 {
 
-    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, int $page = 1): Throwable|OrderResponse
+    public function findUpdatedAtFrom(DateTimeInterface $updatedAt, int $page = 1, ?array $with = null): Throwable|OrderResponse
     {
         $options = [
             'query' => [
@@ -34,6 +34,10 @@ class OrdersProvider extends BaseProvider
                 'sortOrder'     => 'asc',
             ],
         ];
+
+        if(null !== $with){
+            $options['query']['with'] = $with;
+        }
 
         $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDERS, $options);
         if ($response instanceof Throwable) {
@@ -166,9 +170,14 @@ class OrdersProvider extends BaseProvider
      * @return Throwable|OrderShippingPreset[]
      * @throws Throwable
      */
-    public function getShippingPresets()
+    public function getShippingPresets(?string $with = null)
     {
-        $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDER_SHIPPING_PRESETS);
+        $options = null;
+        if(null !== $with){
+            $options['query']['with'] = $with;
+        }
+
+        $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDER_SHIPPING_PRESETS, $options);
         if ($response instanceof Exception) {
             return $response;
         }
