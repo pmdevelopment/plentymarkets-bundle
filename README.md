@@ -6,7 +6,18 @@
 
 Mongo:
 
+    PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
+        tags: [ { name: twig.extension } ]
+    
+    PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
+        arguments:
+            $apiLockRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository'
 
+    jms_serializer.serialized_name_annotation_strategy:
+        class: JMS\Serializer\Naming\SerializedNameAnnotationStrategy
+        arguments:
+            - '@jms_serializer.identical_property_naming_strategy'
+        
     PM\PlentyMarketsBundle\Services\RestfulService:
         arguments:
             $accessTokenRepository: '@PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository'
@@ -20,7 +31,18 @@ Mongo:
 
 Sql:
 
+    PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
+        tags: [ { name: twig.extension } ]
+    
+    PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
+        arguments:
+            $apiLockRepository: '@PM\PlentyMarketsBundle\Repository\ApiLockRepository'
 
+    jms_serializer.serialized_name_annotation_strategy:
+        class: JMS\Serializer\Naming\SerializedNameAnnotationStrategy
+        arguments:
+            - '@jms_serializer.identical_property_naming_strategy'
+        
     PM\PlentyMarketsBundle\Services\RestfulService:
         arguments:
             $accessTokenRepository: '@PM\PlentyMarketsBundle\Repository\AccessTokenRepository'
