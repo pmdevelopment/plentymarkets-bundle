@@ -45,22 +45,21 @@ class RestfulService
     private Config $config;
 
     public function __construct(
-        private readonly AccessTokenRepositoryInterface  $accessTokenRepository,
-        private readonly ApiHitsRepositoryInterface      $apiHitsRepository,
-        private readonly ApiLockRepositoryInterface      $apiLockRepository,
-        private readonly LimitHistoryRepositoryInterface $limitHistoryRepository,
-        private readonly SerializerInterface             $serializer,
-        private readonly ?EntityManagerInterface         $entityManager = null,
-        private readonly ?DocumentManager                $documentManager = null,
-        private readonly LoggerInterface                 $logger,
-        private readonly bool                            $parameterGuzzleVerifySsl
+        private readonly AccessTokenRepositoryInterface      $accessTokenRepository,
+        private readonly ApiHitsRepositoryInterface          $apiHitsRepository,
+        private readonly ApiLockRepositoryInterface          $apiLockRepository,
+        private readonly LimitHistoryRepositoryInterface     $limitHistoryRepository,
+        private readonly SerializerInterface                 $serializer,
+        private readonly \Doctrine\Persistence\ObjectManager $objectManager,
+        private readonly LoggerInterface                     $logger,
+        private readonly bool                                $parameterGuzzleVerifySsl
     )
     {
     }
 
-    public function getEntityManager(): EntityManagerInterface
+    public function getObjectManager(): ObjectManager
     {
-        return $this->entityManager;
+        return $this->objectManager;
     }
 
     public function getSerializer(): SerializerInterface
@@ -271,11 +270,12 @@ class RestfulService
             return $e;
         }
 
-        if (null !== $this->entityManager) {
+        if ($this->objectManager instanceof EntityManagerInterface) {
             $object = new AccessToken();
         } else {
             $object = new \PM\PlentyMarketsBundle\Document\AccessToken();
         }
+
         $object
             ->setApi($api)
             ->setCreated($now)
@@ -307,15 +307,8 @@ class RestfulService
 
     private function saveObject($object): void
     {
-        if (null !== $this->documentManager) {
-            $this->documentManager->persist($object);
-            $this->documentManager->flush();
-        }
-
-        if (null !== $this->entityManager) {
-            $this->entityManager->persist($object);
-            $this->entityManager->flush();
-        }
+        $this->objectManager->persist($object);
+        $this->objectManager->flush();
     }
 
 }
