@@ -1,4 +1,9 @@
 services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
   PM\PlentyMarketsBundle\Repository\AccessTokenRepository: ~
   PM\PlentyMarketsBundle\Repository\ApiHitsRepository: ~
   PM\PlentyMarketsBundle\Repository\ApiLockRepository: ~
