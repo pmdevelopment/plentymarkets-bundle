@@ -29,6 +29,7 @@ class PMPlentyMarketsExtension extends Extension
         } elseif (true === $container->hasParameter('doctrine_mongodb')) {
             $loader->load('services_orm.yml');
         } else {
+            dump($ontainer->getParameterBag());
             throw new RuntimeException('No Object Manager found.');
         }
     }
