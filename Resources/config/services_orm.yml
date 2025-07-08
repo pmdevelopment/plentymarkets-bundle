@@ -1,8 +1,8 @@
 services:
-  PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository: ~
-  PM\PlentyMarketsBundle\DocumentRepository\ApiHitsRepository: ~
-  PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository: ~
-  PM\PlentyMarketsBundle\DocumentRepository\LimitHistoryRepository: ~
+  PM\PlentyMarketsBundle\Repository\AccessTokenRepository: ~
+  PM\PlentyMarketsBundle\Repository\ApiHitsRepository: ~
+  PM\PlentyMarketsBundle\Repository\ApiLockRepository: ~
+  PM\PlentyMarketsBundle\Repository\LimitHistoryRepository: ~
 
   PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
     tags: [ { name: twig.extension } ]
@@ -26,3 +26,4 @@ services:
       $objectManager: '@Doctrine\ORM\EntityManagerInterface'
       $logger: '@logger'
       $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
+3
