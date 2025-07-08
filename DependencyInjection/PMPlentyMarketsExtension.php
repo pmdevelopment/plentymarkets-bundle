@@ -2,10 +2,13 @@
 
 namespace PM\PlentyMarketsBundle\DependencyInjection;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Doctrine\ORM\EntityManagerInterface;
+use RuntimeException;
 
 class PMPlentyMarketsExtension extends Extension
 {
@@ -20,7 +23,14 @@ class PMPlentyMarketsExtension extends Extension
         }
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+
+        if (true === $container->hasParameter('doctrine_mongodb.odm.document_managers')) {
+            $loader->load('services_odm.yml');
+        } elseif (true === $container->hasParameter('doctrine_mongodb')) {
+            $loader->load('services_orm.yml');
+        } else {
+            throw new RuntimeException('No Object Manager found.');
+        }
     }
 
     private function getParameters(array $config, $prefix): array
