@@ -23,7 +23,7 @@ class PMPlentyMarketsExtension extends Extension
         }
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        
+
         if (true === $container->hasParameter('doctrine_mongodb.odm.document_managers')) {
             $loader->load('services_odm.yml');
         } elseif (true === $container->hasParameter('doctrine.orm.entity_manager.class')) {

@@ -26,4 +26,3 @@ services:
       $objectManager: '@Doctrine\ORM\EntityManagerInterface'
       $logger: '@logger'
       $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
-3
