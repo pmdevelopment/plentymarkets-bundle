@@ -10,6 +10,7 @@ namespace PM\PlentyMarketsBundle\Component\Model\Account;
 
 use DateTime;
 use JMS\Serializer\Annotation as JMS;
+use PM\PlentyMarketsBundle\Component\Config\CountryIdType;
 
 /**
  * Class Contact
@@ -1055,5 +1056,4 @@ class Contact
 
         return $this;
     }
-
 }

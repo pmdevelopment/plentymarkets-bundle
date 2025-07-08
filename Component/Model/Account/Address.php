@@ -5,6 +5,7 @@ namespace PM\PlentyMarketsBundle\Component\Model\Account;
 
 use DateTime;
 use JMS\Serializer\Annotation as JMS;
+use PM\PlentyMarketsBundle\Component\Config\CountryIdType;
 
 /**
  * Class Address
@@ -119,6 +120,14 @@ class Address
     private $countryId;
 
     /**
+     * @var string
+     */
+    #[JMS\Type('string')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private $contactPerson;
+
+    /**
      * @var DateTime
      */
     #[JMS\Type('DateTime')]
@@ -157,7 +166,7 @@ class Address
         return $this;
     }
 
-    public function getGender(): string
+    public function getGender(): ?string
     {
         return $this->gender;
     }
@@ -165,14 +174,14 @@ class Address
     /**
      * @return Address
      */
-    public function setGender(string $gender): Address
+    public function setGender(?string $gender): Address
     {
         $this->gender = $gender;
 
         return $this;
     }
 
-    public function getName1(): string
+    public function getName1(): ?string
     {
         return $this->name1;
     }
@@ -180,14 +189,14 @@ class Address
     /**
      * @return Address
      */
-    public function setName1(string $name1): Address
+    public function setName1(?string $name1): Address
     {
         $this->name1 = $name1;
 
         return $this;
     }
 
-    public function getName2(): string
+    public function getName2(): ?string
     {
         return $this->name2;
     }
@@ -195,14 +204,14 @@ class Address
     /**
      * @return Address
      */
-    public function setName2(string $name2): Address
+    public function setName2(?string $name2): Address
     {
         $this->name2 = $name2;
 
         return $this;
     }
 
-    public function getName3(): string
+    public function getName3(): ?string
     {
         return $this->name3;
     }
@@ -210,14 +219,14 @@ class Address
     /**
      * @return Address
      */
-    public function setName3(string $name3): Address
+    public function setName3(?string $name3): Address
     {
         $this->name3 = $name3;
 
         return $this;
     }
 
-    public function getName4(): string
+    public function getName4(): ?string
     {
         return $this->name4;
     }
@@ -225,14 +234,14 @@ class Address
     /**
      * @return Address
      */
-    public function setName4(string $name4): Address
+    public function setName4(?string $name4): Address
     {
         $this->name4 = $name4;
 
         return $this;
     }
 
-    public function getAddress1(): string
+    public function getAddress1(): ?string
     {
         return $this->address1;
     }
@@ -240,14 +249,14 @@ class Address
     /**
      * @return Address
      */
-    public function setAddress1(string $address1): Address
+    public function setAddress1(?string $address1): Address
     {
         $this->address1 = $address1;
 
         return $this;
     }
 
-    public function getAddress2(): string
+    public function getAddress2(): ?string
     {
         return $this->address2;
     }
@@ -255,14 +264,14 @@ class Address
     /**
      * @return Address
      */
-    public function setAddress2(string $address2): Address
+    public function setAddress2(?string $address2): Address
     {
         $this->address2 = $address2;
 
         return $this;
     }
 
-    public function getAddress3(): string
+    public function getAddress3(): ?string
     {
         return $this->address3;
     }
@@ -270,14 +279,14 @@ class Address
     /**
      * @return Address
      */
-    public function setAddress3(string $address3): Address
+    public function setAddress3(?string $address3): Address
     {
         $this->address3 = $address3;
 
         return $this;
     }
 
-    public function getAddress4(): string
+    public function getAddress4(): ?string
     {
         return $this->address4;
     }
@@ -285,7 +294,7 @@ class Address
     /**
      * @return Address
      */
-    public function setAddress4(string $address4): Address
+    public function setAddress4(?string $address4): Address
     {
         $this->address4 = $address4;
 
@@ -342,6 +351,18 @@ class Address
         return $this->checkedAt;
     }
 
+    public function getContactPerson(): string
+    {
+        return $this->contactPerson;
+    }
+
+    public function setContactPerson(string $contactPerson): Address
+    {
+        $this->contactPerson = $contactPerson;
+
+        return $this;
+    }
+    
     /**
      * @return Address
      */
@@ -382,4 +403,9 @@ class Address
         return $this;
     }
 
+
+    public function getCountry(): CountryIdType
+    {
+        return CountryIdType::tryFrom($this->countryId);
+    }
 }

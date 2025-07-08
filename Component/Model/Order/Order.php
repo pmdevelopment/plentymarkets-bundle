@@ -87,6 +87,22 @@ class Order
     private $orderReferences;
 
     /**
+     * @var OrderReference[]
+     */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderReference>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private $originOrderReferences;
+
+    /**
+     * @var null|OrderShippingPackage[]
+     */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\OrderShippingPackage>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private $shippingPackages;
+
+    /**
      * @var int
      */
     #[JMS\Type('integer')]
@@ -521,6 +537,46 @@ class Order
 
         return $this;
     }
+
+    /**
+     * @return OrderReference[]
+     */
+    public function getOriginOrderReferences()
+    {
+        return $this->originOrderReferences;
+    }
+
+    /**
+     * @param OrderReference[] $originOrderReferences
+     *
+     * @return Order
+     */
+    public function setOriginOrderReferences($originOrderReferences)
+    {
+        $this->originOrderReferences = $originOrderReferences;
+
+        return $this;
+    }
+
+    /**
+     * @return null|OrderShippingPackage[]
+     */
+    public function getShippingPackages(): ?array
+    {
+        return $this->shippingPackages;
+    }
+
+    /**
+     * @param null|OrderShippingPackage[] $shippingPackages
+     *
+     * @return Order
+     */
+    public function setShippingPackages(?array $shippingPackages): Order
+    {
+        $this->shippingPackages = $shippingPackages;
+        return $this;
+    }
+
 
     /**
      * Get Address By Id

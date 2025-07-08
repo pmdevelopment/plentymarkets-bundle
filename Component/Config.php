@@ -26,8 +26,14 @@ class Config
      * @param string $username
      * @param string $password
      */
-    public function __construct(private $uri, private $username, private $password, private readonly float $limitLock, private readonly float $shortLimitLock, private bool $priority = false)
-    {
+    public function __construct(
+        private $uri,
+        private $username,
+        private $password,
+        private readonly float $limitLock,
+        private readonly float $shortLimitLock,
+        private bool $priority = false
+    ){
     }
 
     /**

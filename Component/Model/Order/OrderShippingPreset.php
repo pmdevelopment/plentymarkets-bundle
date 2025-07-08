@@ -9,7 +9,7 @@
 namespace PM\PlentyMarketsBundle\Component\Model\Order;
 
 use JMS\Serializer\Annotation as JMS;
-
+use PM\PlentyMarketsBundle\Component\Model\Order\ParcelServiceName;
 /**
  * Class OrderShippingPreset
  *
@@ -195,6 +195,15 @@ class OrderShippingPreset
     #[JMS\Expose]
     #[JMS\Since('1.0')]
     private $supportedLoyaltyPrograms;
+
+    /**
+     * @var array
+     */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Order\ParcelServiceName>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private $parcelServiceNames;
+
 
     /**
      * @return int
@@ -636,4 +645,14 @@ class OrderShippingPreset
         return $this;
     }
 
+    public function getParcelServiceNames(): array
+    {
+        return $this->parcelServiceNames;
+    }
+
+    public function setParcelServiceNames(array $parcelServiceNames): OrderShippingPreset
+    {
+        $this->parcelServiceNames = $parcelServiceNames;
+        return $this;
+    }
 }

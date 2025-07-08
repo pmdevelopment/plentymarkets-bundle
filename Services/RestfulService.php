@@ -3,6 +3,7 @@
 namespace PM\PlentyMarketsBundle\Services;
 
 use DateTime;
+use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
@@ -11,6 +12,10 @@ use GuzzleHttp\RequestOptions;
 use JMS\Serializer\SerializerInterface;
 use PM\PlentyMarketsBundle\Component\Config;
 use PM\PlentyMarketsBundle\Component\Helper\ServiceHelper;
+use PM\PlentyMarketsBundle\Component\Interfaces\AccessTokenRepositoryInterface;
+use PM\PlentyMarketsBundle\Component\Interfaces\ApiHitsRepositoryInterface;
+use PM\PlentyMarketsBundle\Component\Interfaces\ApiLockRepositoryInterface;
+use PM\PlentyMarketsBundle\Component\Interfaces\LimitHistoryRepositoryInterface;
 use PM\PlentyMarketsBundle\Component\Provider\AccountsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\BackendProvider;
 use PM\PlentyMarketsBundle\Component\Provider\BaseProvider;
@@ -23,14 +28,12 @@ use PM\PlentyMarketsBundle\Component\Provider\StockManagementProvider;
 use PM\PlentyMarketsBundle\Component\Provider\TagsProvider;
 use PM\PlentyMarketsBundle\Component\Provider\WarehousesProvider;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
+use PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository;
 use PM\PlentyMarketsBundle\Entity\AccessToken;
 use PM\PlentyMarketsBundle\Entity\ApiHits;
 use PM\PlentyMarketsBundle\Entity\ApiLock;
 use PM\PlentyMarketsBundle\Entity\LimitHistory;
 use PM\PlentyMarketsBundle\Repository\AccessTokenRepository;
-use PM\PlentyMarketsBundle\Repository\ApiHitsRepository;
-use PM\PlentyMarketsBundle\Repository\ApiLockRepository;
-use PM\PlentyMarketsBundle\Repository\LimitHistoryRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,13 +44,22 @@ class RestfulService
 {
     private Config $config;
 
-    public function __construct(private readonly AccessTokenRepository $accessTokenRepository, private readonly ApiHitsRepository $apiHitsRepository, private readonly ApiLockRepository $apiLockRepository, private readonly SerializerInterface $serializer, private readonly EntityManagerInterface $entityManager, private readonly LimitHistoryRepository $limitHistoryRepository, private readonly LoggerInterface $logger, private readonly bool $parameterGuzzleVerifySsl)
+    public function __construct(
+        private readonly AccessTokenRepositoryInterface      $accessTokenRepository,
+        private readonly ApiHitsRepositoryInterface          $apiHitsRepository,
+        private readonly ApiLockRepositoryInterface          $apiLockRepository,
+        private readonly LimitHistoryRepositoryInterface     $limitHistoryRepository,
+        private readonly SerializerInterface                 $serializer,
+        private readonly \Doctrine\Persistence\ObjectManager $objectManager,
+        private readonly LoggerInterface                     $logger,
+        private readonly bool                                $parameterGuzzleVerifySsl
+    )
     {
     }
 
-    public function getEntityManager(): EntityManagerInterface
+    public function getObjectManager(): ObjectManager
     {
-        return $this->entityManager;
+        return $this->objectManager;
     }
 
     public function getSerializer(): SerializerInterface
@@ -60,7 +72,7 @@ class RestfulService
         return $this->logger;
     }
 
-    public function getApiLockRepository(): ApiLockRepository
+    public function getApiLockRepository(): ApiLockRepositoryInterface
     {
         return $this->apiLockRepository;
     }
@@ -177,10 +189,10 @@ class RestfulService
         return new Client(
             [
                 'base_uri' => $uri,
-                'verify'   => $this->parameterGuzzleVerifySsl,
-                'headers'  => [
-                    'Accept'                             => 'application/x.plentymarkets.v1+json',
-                    'Authorization'                      => sprintf(
+                'verify' => $this->parameterGuzzleVerifySsl,
+                'headers' => [
+                    'Accept' => 'application/x.plentymarkets.v1+json',
+                    'Authorization' => sprintf(
                         'Bearer %s',
                         $this->getAccessToken(
                             $uri,
@@ -203,7 +215,7 @@ class RestfulService
         $client = new Client(
             [
                 'base_uri' => $uri,
-                'verify'   => $this->parameterGuzzleVerifySsl,
+                'verify' => $this->parameterGuzzleVerifySsl,
             ]
         );
 
@@ -258,15 +270,19 @@ class RestfulService
             return $e;
         }
 
-        $object = new AccessToken();
+        if ($this->objectManager instanceof EntityManagerInterface) {
+            $object = new AccessToken();
+        } else {
+            $object = new \PM\PlentyMarketsBundle\Document\AccessToken();
+        }
+
         $object
             ->setApi($api)
             ->setCreated($now)
             ->setToken($token)
             ->setValidUntil($now->setTimestamp(time() + $expires - 600));
 
-        $this->entityManager->persist($object);
-        $this->entityManager->flush();
+        $this->saveObject($object);
 
         return $this;
     }
@@ -287,6 +303,12 @@ class RestfulService
         }
 
         return sprintf('%srest/', $uri);
+    }
+
+    private function saveObject($object): void
+    {
+        $this->objectManager->persist($object);
+        $this->objectManager->flush();
     }
 
 }

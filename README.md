@@ -1,0 +1,55 @@
+# Plentymarketsbundle
+
+## Config
+
+### services.yaml
+
+Mongo:
+
+    PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
+        tags: [ { name: twig.extension } ]
+    
+    PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
+        arguments:
+            $apiLockRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository'
+
+    jms_serializer.serialized_name_annotation_strategy:
+        class: JMS\Serializer\Naming\SerializedNameAnnotationStrategy
+        arguments:
+            - '@jms_serializer.identical_property_naming_strategy'
+        
+    PM\PlentyMarketsBundle\Services\RestfulService:
+        arguments:
+            $accessTokenRepository: '@PM\PlentyMarketsBundle\DocumentRepository\AccessTokenRepository'
+            $apiHitsRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiHitsRepository'
+            $apiLockRepository: '@PM\PlentyMarketsBundle\DocumentRepository\ApiLockRepository'
+            $limitHistoryRepository: '@PM\PlentyMarketsBundle\DocumentRepository\LimitHistoryRepository'
+            $serializer: '@jms_serializer.serializer'
+            $objectManager: '@Doctrine\ODM\MongoDB\DocumentManager'
+            $logger: '@logger'
+            $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
+
+Sql:
+
+    PM\PlentyMarketsBundle\Services\Twig\AccountsTwigExtension:
+        tags: [ { name: twig.extension } ]
+    
+    PM\PlentyMarketsBundle\Services\Twig\ApiTwigExtension:
+        arguments:
+            $apiLockRepository: '@PM\PlentyMarketsBundle\Repository\ApiLockRepository'
+
+    jms_serializer.serialized_name_annotation_strategy:
+        class: JMS\Serializer\Naming\SerializedNameAnnotationStrategy
+        arguments:
+            - '@jms_serializer.identical_property_naming_strategy'
+        
+    PM\PlentyMarketsBundle\Services\RestfulService:
+        arguments:
+            $accessTokenRepository: '@PM\PlentyMarketsBundle\Repository\AccessTokenRepository'
+            $apiHitsRepository: '@PM\PlentyMarketsBundle\Repository\ApiHitsRepository'
+            $apiLockRepository: '@PM\PlentyMarketsBundle\Repository\ApiLockRepository'
+            $limitHistoryRepository: '@PM\PlentyMarketsBundle\Repository\LimitHistoryRepository'
+            $serializer: '@jms_serializer.serializer'
+            $objectManager: '@Doctrine\ORM\EntityManagerInterface'
+            $logger: '@logger'
+            $parameterGuzzleVerifySsl: '%pm__plenty_market.configuration.guzzle.verify_ssl%'
