@@ -31,7 +31,7 @@ class Comments
                     'referenceType'       => 'order',
                     'referenceValue'      => $orderId,
                     'text'                => $text,
-                    'userId'              => 204,
+                    'userId'              => $_ENV['APP_PLENTY_USER_ID'],
                     'isVisibleForContact' => false,
                 ]
             );

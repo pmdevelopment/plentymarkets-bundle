@@ -5,6 +5,7 @@ namespace PM\PlentyMarketsBundle\Component\Model\Order;
 use DateTime;
 use JMS\Serializer\Annotation as JMS;
 use PM\PlentyMarketsBundle\Component\Model\Account\Address;
+use PM\PlentyMarketsBundle\Component\Model\Mixed\Tag;
 
 class Order
 {
@@ -101,6 +102,15 @@ class Order
     #[JMS\Expose]
     #[JMS\Since('1.0')]
     private $shippingPackages;
+
+    /**
+     * @var array|Tag[]
+     */
+    #[JMS\Type('array<PM\PlentyMarketsBundle\Component\Model\Mixed\Tag>')]
+    #[JMS\Expose]
+    #[JMS\Since('1.0')]
+    private $tags;
+
 
     /**
      * @var int
@@ -299,6 +309,18 @@ class Order
     public function setDates($dates)
     {
         $this->dates = $dates;
+
+        return $this;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    public function setTags(array $tags): Order
+    {
+        $this->tags = $tags;
 
         return $this;
     }
@@ -574,6 +596,7 @@ class Order
     public function setShippingPackages(?array $shippingPackages): Order
     {
         $this->shippingPackages = $shippingPackages;
+
         return $this;
     }
 
@@ -652,6 +675,17 @@ class Order
         foreach ($this->getProperties() as $property) {
             if ($typeId === $property->getTypeId()) {
                 return $property;
+            }
+        }
+
+        return null;
+    }
+
+    public function getTagById(int $id): ?Tag
+    {
+        foreach ($this->getTags() as $tag) {
+            if ($id === $tag->getId()) {
+                return $tag;
             }
         }
 

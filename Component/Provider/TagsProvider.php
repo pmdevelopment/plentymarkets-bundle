@@ -8,19 +8,9 @@ use PM\PlentyMarketsBundle\Component\RestfulUrl;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
-/**
- * Class TagsProvider
- *
- * @package PM\PlentyMarketsBundle\Component\Provider
- */
 class TagsProvider extends BaseProvider
 {
 
-    /**
-     * PUT: Relationship
-     *
-     *
-     */
     public function postRelationship(int $tagId, string $tagType, string $relationshipValue, string $relationshipUUID5 = ''): ?Throwable
     {
         $options = [
