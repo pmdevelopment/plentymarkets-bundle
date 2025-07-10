@@ -187,17 +187,11 @@ class OrdersProvider extends BaseProvider
         return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), OrderPropertyType::class, 'json');
     }
 
-    /**
-     * Get Shipping Presets
-     *
-     * @return Throwable|OrderShippingPreset[]
-     * @throws Throwable
-     */
-    public function getShippingPresets(?string $with = null)
+    public function getShippingPresets(?string $with = null): array|Throwable
     {
-        $options = null;
+        $options = [];
         if (null !== $with) {
-            $options['query']['with'] = $with;
+            $options['query'] = ['with' => $with];
         }
 
         $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDER_SHIPPING_PRESETS, $options);
