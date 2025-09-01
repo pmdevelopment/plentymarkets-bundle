@@ -15,7 +15,7 @@ use PM\PlentyMarketsBundle\Component\Model\Order\OrderShippingPreset;
 use PM\PlentyMarketsBundle\Component\Model\Order\StatusHistoryEntry;
 use PM\PlentyMarketsBundle\Component\Response\OrderResponse;
 use PM\PlentyMarketsBundle\Component\RestfulUrl;
-use Psr\Http\Message\ResponseInterface;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Throwable;
 
@@ -28,14 +28,14 @@ class OrdersProvider extends BaseProvider
         $options = [
             'query' => [
                 'updatedAtFrom' => $updatedAt->format('c'),
-                'itemsPerPage'  => 250,
-                'page'          => $page,
-                'sortBy'        => 'id',
-                'sortOrder'     => 'asc',
+                'itemsPerPage' => 250,
+                'page' => $page,
+                'sortBy' => 'id',
+                'sortOrder' => 'asc',
             ],
         ];
 
-        if(null !== $with){
+        if (null !== $with) {
             $options['query']['with'] = $with;
         }
 
@@ -50,11 +50,49 @@ class OrdersProvider extends BaseProvider
         return $data;
     }
 
+    public function getByExternalOrderId(string $externalOrderId, ?array $with = null): null|Throwable|Order
+    {
+        $query = [
+            'externalOrderId' => $externalOrderId,
+        ];
+        if (null !== $with) {
+            $query['with'] = $with;
+        }
+
+
+        $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDERS, [
+            RequestOptions::QUERY => $query,
+        ]);
+
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        $body = $this->getBodyContentsWithFixedDate($response);
+
+        try {
+            /** @var OrderResponse $orderResponse */
+            $orderResponse = $this->getService()->getSerializer()->deserialize($body, OrderResponse::class, 'json');
+        } catch (Throwable $throwable) {
+            return $throwable;
+        }
+
+        if (0 === $orderResponse->getTotalsCount()) {
+            return new RuntimeException(sprintf('Found no orders for externalOrderId "%s"', $externalOrderId));
+        }
+
+        if (1 < $orderResponse->getTotalsCount()) {
+            return new RuntimeException(sprintf('Found %d orders for externalOrderId "%s"', $orderResponse->getTotalsCount(), $externalOrderId));
+        }
+
+        return $orderResponse->getEntries()[0];
+    }
+
     public function getById(int $orderId, array $query = []): Throwable|Order
     {
-        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ORDER, $orderId), ['query' => $query]);
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ORDER, $orderId), [RequestOptions::QUERY => $query]);
 
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -67,14 +105,7 @@ class OrdersProvider extends BaseProvider
         }
     }
 
-    /**
-     * Get Order By Id; Include Addresses
-     *
-     *
-     * @return array|Throwable|object|Order
-     * @throws Throwable
-     */
-    public function getByIdWithAddresses(int $orderId)
+    public function getByIdWithAddresses(int $orderId): Throwable|Order
     {
         return $this->getById(
             $orderId,
@@ -84,18 +115,10 @@ class OrdersProvider extends BaseProvider
         );
     }
 
-    /**
-     * Get Order Shipping packages
-     *
-     * @param int $orderId
-     *
-     * @return array|OrderShippingPackage[]
-     * @throws Throwable
-     */
-    public function getShippingPackages($orderId)
+    public function getShippingPackages($orderId): array|Throwable
     {
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ORDER_SHIPPING_PACKAGES, $orderId));
-        if ($response instanceof Exception) {
+        if ($response instanceof Throwable) {
             return $response;
         }
 
@@ -164,17 +187,11 @@ class OrdersProvider extends BaseProvider
         return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), OrderPropertyType::class, 'json');
     }
 
-    /**
-     * Get Shipping Presets
-     *
-     * @return Throwable|OrderShippingPreset[]
-     * @throws Throwable
-     */
-    public function getShippingPresets(?string $with = null)
+    public function getShippingPresets(?string $with = null): array|Throwable
     {
-        $options = null;
-        if(null !== $with){
-            $options['query']['with'] = $with;
+        $options = [];
+        if (null !== $with) {
+            $options['query'] = ['with' => $with];
         }
 
         $response = $this->getResponse(Request::METHOD_GET, RestfulUrl::ORDER_SHIPPING_PRESETS, $options);
@@ -227,11 +244,34 @@ class OrdersProvider extends BaseProvider
         );
     }
 
+    public function postComment(int $orderId, string $comment): bool|Throwable
+    {
+        $response = $this->getResponse(
+            Request::METHOD_PUT,
+            RestfulUrl::COMMENTS,
+            [
+                RequestOptions::JSON => [
+                    'referenceType' => 'order',
+                    'referenceValue' => $orderId,
+                    'text' => $comment,
+                    'userId' => $_ENV['APP_PLENTY_USER_ID'],
+                    'isVisibleForContact' => false,
+                ],
+            ]
+        );
+
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        return true;
+    }
+
     /**
      * Put property value
      *
-     * @param int    $orderId
-     * @param int    $propertyId
+     * @param int $orderId
+     * @param int $propertyId
      * @param string $value
      *
      * @return bool|Exception
@@ -244,7 +284,7 @@ class OrdersProvider extends BaseProvider
             [
                 RequestOptions::JSON => [
                     'typeId' => $propertyId,
-                    'value'  => $value,
+                    'value' => $value,
                 ],
             ]
         );
@@ -271,7 +311,7 @@ class OrdersProvider extends BaseProvider
                 RequestOptions::JSON => [
                     'orderItems' => [
                         [
-                            'id'          => $orderItemId,
+                            'id' => $orderItemId,
                             'warehouseId' => $warehouseApiId,
                         ],
                     ],
