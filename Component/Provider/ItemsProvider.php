@@ -11,6 +11,7 @@ use PM\PlentyMarketsBundle\Component\Model\Item\ItemImage;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemShippingProfile;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariation;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationBarcode;
+use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationDescription;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationSalesPrice;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationStock;
 use PM\PlentyMarketsBundle\Component\Model\Item\ItemVariationStockStorageLocation;
@@ -272,6 +273,16 @@ class ItemsProvider extends BaseProvider
         return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), ItemVariation::class, 'json');
     }
 
+    public function getVariationDescriptions(int $itemId, int $variationId): Throwable|array
+    {
+        $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_DESCRIPTIONS, $itemId, $variationId));
+        if ($response instanceof Throwable) {
+            return $response;
+        }
+
+        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), sprintf('array<%s>', ItemVariationDescription::class), 'json');
+    }
+
     public function getVariationImages(int $itemId, int $variationId): array
     {
         $response = $this->getResponse(Request::METHOD_GET, sprintf(RestfulUrl::ITEM_VARIATION_IMAGES, $itemId, $variationId));
@@ -279,11 +290,7 @@ class ItemsProvider extends BaseProvider
             throw $response;
         }
 
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemImage::class),
-            'json'
-        );
+        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), sprintf('array<%s>', ItemImage::class), 'json');
     }
 
     public function getVariationStock(int $itemId, int $variationId, bool $flushEntities = true): array
@@ -300,11 +307,7 @@ class ItemsProvider extends BaseProvider
             throw $response;
         }
 
-        return $this->getService()->getSerializer()->deserialize(
-            $response->getBody()->getContents(),
-            sprintf('array<%s>', ItemVariationStock::class),
-            'json'
-        );
+        return $this->getService()->getSerializer()->deserialize($response->getBody()->getContents(), sprintf('array<%s>', ItemVariationStock::class), 'json');
     }
 
     public function getVariationWarehouses(int $itemId, int $variationId): array|Throwable
@@ -341,7 +344,7 @@ class ItemsProvider extends BaseProvider
             [
                 'query' => array_merge(
                     [
-                        'page'         => $page,
+                        'page' => $page,
                         'itemsPerPage' => 200,
                     ],
                     $query
@@ -451,10 +454,10 @@ class ItemsProvider extends BaseProvider
             sprintf(RestfulUrl::ITEM_VARIATION_STOCK_CORRECTION, $itemId, $variationId),
             [
                 RequestOptions::JSON => [
-                    'quantity'          => $quantity,
-                    'warehouseId'       => $warehouseId,
+                    'quantity' => $quantity,
+                    'warehouseId' => $warehouseId,
                     'storageLocationId' => $storageLocationId,
-                    'reasonId'          => $reason,
+                    'reasonId' => $reason,
                 ],
             ]
         );
@@ -473,12 +476,12 @@ class ItemsProvider extends BaseProvider
             sprintf(RestfulUrl::ITEM_VARIATION_BOOK_INCOMING_ITEMS, $itemId, $variationId),
             [
                 RequestOptions::JSON => [
-                    'currency'          => 'EUR',
-                    'deliveredAt'       => date('c'),
-                    'quantity'          => $quantity,
-                    'warehouseId'       => $warehouseId,
+                    'currency' => 'EUR',
+                    'deliveredAt' => date('c'),
+                    'quantity' => $quantity,
+                    'warehouseId' => $warehouseId,
                     'storageLocationId' => $storageLocationId,
-                    'reasonId'          => $reason,
+                    'reasonId' => $reason,
                 ],
             ]
         );
@@ -501,12 +504,12 @@ class ItemsProvider extends BaseProvider
         $reason = Item::REASON_STOCK_REDISTRIBUTE
     ): bool|Throwable {
         $request = [
-            'reasonId'                 => $reason,
-            'quantity'                 => $quantity,
+            'reasonId' => $reason,
+            'quantity' => $quantity,
             'currentStorageLocationId' => $currentStorageLocationId,
-            'currentWarehouseId'       => $currentWarehouseId,
-            'newStorageLocationId'     => $newStorageLocationId,
-            'newWarehouseId'           => $newWarehouseId,
+            'currentWarehouseId' => $currentWarehouseId,
+            'newStorageLocationId' => $newStorageLocationId,
+            'newWarehouseId' => $newWarehouseId,
         ];
 
         $response = $this->getResponse(
@@ -569,7 +572,7 @@ class ItemsProvider extends BaseProvider
             sprintf(RestfulUrl::ITEM_VARIATION_WAREHOUSES, $itemId, $variationId),
             [
                 RequestOptions::FORM_PARAMS => [
-                    'warehouseId'  => $warehouseId,
+                    'warehouseId' => $warehouseId,
                     'reorderLevel' => $reorderLevel,
                 ],
             ]
