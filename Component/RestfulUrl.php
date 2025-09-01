@@ -26,16 +26,17 @@ class RestfulUrl
     public const ITEM_SALES_PRICE = 'items/sales_prices/%d';
     public const ITEM_SHIPPING_PROFILES = 'items/%d/item_shipping_profiles';
     public const ITEM_VARIATION = 'items/%d/variations/%d';
-    public const ITEM_VARIATION_STOCK = 'items/%d/variations/%d/stock';
+    public const ITEM_VARIATION_BARCODES = 'items/%d/variations/%d/variation_barcodes';
     public const ITEM_VARIATION_BOOK_INCOMING_ITEMS = 'items/%d/variations/%d/stock/bookIncomingItems';
+    public const ITEM_VARIATION_DESCRIPTIONS = 'items/%d/variations/%d/descriptions';
     public const ITEM_VARIATION_IMAGES = 'items/%d/variations/%d/images';
+    public const ITEM_VARIATION_SALES_PRICES = 'items/%d/variations/%d/variation_sales_prices';
+    public const ITEM_VARIATION_STOCK = 'items/%d/variations/%d/stock';
     public const ITEM_VARIATION_STOCK_CORRECTION = 'items/%d/variations/%d/stock/correction';
     public const ITEM_VARIATION_STOCK_STORAGE_LOCATIONS = 'items/%d/variations/%d/stock/storageLocations';
-    public const ITEM_VARIATION_SALES_PRICES = 'items/%d/variations/%d/variation_sales_prices';
-    public const ITEM_VARIATION_BARCODES = 'items/%d/variations/%d/variation_barcodes';
+    public const ITEM_VARIATION_SUPPLIERS = 'items/%d/variations/%d/variation_suppliers';
     public const ITEM_VARIATION_WAREHOUSES = 'items/%d/variations/%d/variation_warehouses';
     public const ITEM_VARIATION_WAREHOUSES_WAREHOUSE = 'items/%d/variations/%d/variation_warehouses/%d';
-    public const ITEM_VARIATION_SUPPLIERS = 'items/%d/variations/%d/variation_suppliers';
     public const ITEM_VARIATIONS = 'items/variations';
 
     public const ORDER = 'orders/%d';
